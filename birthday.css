@@ -10,6 +10,7 @@ body {
 }
 
 h1 {
+  background: black;
   color: rgb(27, 34, 164);
   font-family: Helvetica, sans-serif;
   font-size: 20px;
@@ -18,6 +19,7 @@ h1 {
 
 .birthday {
   animation: birthdayColors 10s infinite ease-in;
+  background: black;
   transition: color 10s;
 }
 
