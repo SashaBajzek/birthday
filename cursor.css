@@ -1,0 +1,9 @@
+body {
+  cursor: none;
+}
+
+.pacman {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+}
