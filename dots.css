@@ -1,0 +1,17 @@
+.dot__large {
+  background-color: rgb(253, 183, 153);
+  border-radius: 5px;
+  height: 10px;
+  position: absolute;
+  width: 10px;
+  z-index: -1;
+}
+
+.dot__small {
+  background-color: rgb(253, 183, 153);
+  border-radius: 2px;
+  height: 4px;
+  position: absolute;
+  width: 4px;
+  z-index: -1;
+}

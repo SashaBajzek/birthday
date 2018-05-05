@@ -6,4 +6,5 @@ body {
   position: absolute;
   height: 20px;
   width: 20px;
+  z-index: 2;
 }

@@ -25,8 +25,8 @@ var PacMan = function() {
 // The PacMan.prototype.draw() method sets the position of 
 // the object's <div> node
 PacMan.prototype.draw = function() {
-  this.node.style.left = this.newX + "px";
-  this.node.style.top = this.newY + "px";
+  this.node.style.left = this.newX - 7 + "px";
+  this.node.style.top = this.newY - 7 + "px";
   if(frame < 5) {
     this.node.style.background = "center / contain no-repeat url(./images/pacman/Pac-Man.svg)";
   } else {
@@ -45,42 +45,3 @@ PacMan.prototype.draw = function() {
 };
 
 pacMan = new PacMan();
-
-// This is the screen redraw function
-function draw() {
-  // Make sure the mouse position is set everytime
-    // draw() is called.
-  var x = mouse.newX,
-      y = mouse.newY;
-  
-  pacMan.frame = frame;
-  pacMan.prevX = mouse.prevX;
-  pacMan.prevY = mouse.prevY;
-  pacMan.newX = x;
-  pacMan.newY = y;
-  pacMan.draw();
-
- }
-
- addEventListener("mousemove", function(event) {
-  if(frame > 10) {
-    frame = 0;
-  } else {
-    frame++;
-  }
-
-  mouse.prevX = mouse.newX;
-  mouse.prevY = mouse.newY;
-  mouse.newX = event.pageX;
-  mouse.newY = event.pageY;
- });
- 
- // animate() calls draw() then recursively calls itself
-  // everytime the screen repaints via requestAnimationFrame().
- function animate() {
-  draw();
-  requestAnimationFrame(animate);
- }
- 
- // And get it started by calling animate().
- animate();
