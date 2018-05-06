@@ -1,66 +1,72 @@
-// pacMan is a PacMan object,
-// mouse is an object used to track the X and Y position
-// of the mouse, set with a mousemove event listener below
-var pacMan = undefined,
-frame = 0;
-
-// The PacMan object used to scaffold the dots
-var PacMan = function() {
-  this.targetX = 0;
-  this.targetY = 0;
-  this.newX = 0;
-  this.newY = 0;
-  this.node = (function(){
+var pacMan = {
+  targetX: 0,
+  targetY: 0,
+  currentX: 0,
+  currentY: 0,
+  previousX: 0,
+  previousY: 0,
+  direction: "right",
+  mouthOpen: true,
+  draw: pacManDraw,
+  node: (function(){
     var n = document.createElement("div");
     n.className = "pacman";
     document.body.appendChild(n);
     return n;
-  }());
+  }())
 };
 
-// The PacMan.prototype.draw() method sets the position of 
-// the object's <div> node
-PacMan.prototype.draw = function() {
-  this.prevX = this.newX;
-  this.prevY = this.newY;
+function pacManDraw() {
+  pacMan.prevX = pacMan.currentX;
+  pacMan.prevY = pacMan.currentY;
 
   setLocation();
 
-  this.node.style.left = this.newX - 7 + "px";
-  this.node.style.top = this.newY - 7 + "px";
-
+  pacMan.node.style.left = pacMan.currentX - 7 + "px";
+  pacMan.node.style.top = pacMan.currentY - 7 + "px";
 
   
-  if(frame === 0) {
-    this.node.style.background = "center / contain no-repeat url(./images/pacman/Pac-Man.svg)";
+  if(pacMan.mouthOpen) {
+    pacMan.mouthOpen = false;
+    pacMan.node.style.background = "center / contain no-repeat url(./images/pacman/Pac-Man.svg)";
   } else {
-    this.node.style.background = "center / contain no-repeat url(./images/pacman/Pac-Man__Closed.svg)";
+    pacMan.mouthOpen = true;
+    pacMan.node.style.background = "center / contain no-repeat url(./images/pacman/Pac-Man__Closed.svg)";
   }
   
-  if(this.newX > this.prevX) {
-    this.node.style.transform = "rotate(180deg)";
-  } else if(this.newX < this.prevX) {
-    this.node.style.transform = "rotate(0deg)";
-  } else if(this.newY > this.prevY) {
-    this.node.style.transform = "rotate(-90deg)";
-  } else if(this.newY < this.prevY) {
-    this.node.style.transform = "rotate(90deg)";
+  if(pacMan.direction === "right") {
+    pacMan.node.style.transform = "rotate(180deg)";
+  } else if(pacMan.direction === "left") {
+    pacMan.node.style.transform = "rotate(0deg)";
+  } else if(pacMan.direction === "down") {
+    pacMan.node.style.transform = "rotate(-90deg)";
+  } else if(pacMan.direction === "up") {
+    pacMan.node.style.transform = "rotate(90deg)";
   }
 };
 
 function setLocation() {
-  if(pacMan.targetX - pacMan.newX > 0) {
-    pacMan.newX += 10;
-  } else if(pacMan.targetX - pacMan.newX < 0) {
-    pacMan.newX -= 10;
-  }
+  // Restrain Pac-Man to only moving one direction at a time
+  // Choose the X/Y direction to move first, based on largest distance
 
-  if(pacMan.targetY - pacMan.newY > 0) {
-    pacMan.newY += 10;
-  } else if(pacMan.targetY - pacMan.newY < 0) {
-    pacMan.newY -= 10;
+  var diffX = pacMan.targetX - pacMan.currentX;
+  var diffY = pacMan.targetY - pacMan.currentY;
+
+  if(Math.abs(diffX) > Math.abs(diffY)) {
+    if(diffX > 0) {
+      pacMan.direction = "right";
+      pacMan.currentX += 10;
+    } else if(diffX < 0) {
+      pacMan.direction = "left";
+      pacMan.currentX -= 10;
+    }
+  } else {
+    if(diffY > 0) {
+      pacMan.direction = "down";
+      pacMan.currentY += 10;
+    } else if(diffY < 0) {
+      pacMan.direction = "up";
+      pacMan.currentY -= 10;
+    }
   }
 }
-
-
-pacMan = new PacMan();
