@@ -14,9 +14,9 @@ function draw() {
 
   dots.forEach(dot => dot.draw());
 
- }
+}
 
- addEventListener("mousemove", function(event) {
+var pacManMoving = function(event) {
   if(frame > 10) {
     frame = 0;
   } else {
@@ -27,14 +27,21 @@ function draw() {
   mouse.prevY = mouse.newY;
   mouse.newX = event.pageX;
   mouse.newY = event.pageY;
- });
- 
- // animate() calls draw() then recursively calls itself
+};
+
+addEventListener("mousemove", pacManMoving);
+addEventListener("touchstart", pacManMoving);
+addEventListener("touchmove", pacManMoving);
+
+// Prevent scrolling
+document.body.addEventListener('touchmove', function(e){ e.preventDefault(); }, { passive: false });
+
+// animate() calls draw() then recursively calls itself
   // everytime the screen repaints via requestAnimationFrame().
- function animate() {
+function animate() {
   draw();
   requestAnimationFrame(animate);
- }
- 
- // And get it started by calling animate().
- animate();
+}
+
+// And get it started by calling animate().
+animate();

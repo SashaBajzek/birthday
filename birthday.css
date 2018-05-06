@@ -1,5 +1,6 @@
 html {
   background: black;
+  overflow: hidden;
 }
 
 body {
@@ -7,6 +8,10 @@ body {
   box-sizing: border-box;
   display: flex;
   height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
 }
 
 h1 {
