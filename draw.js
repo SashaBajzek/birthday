@@ -33,6 +33,9 @@ addEventListener("mousemove", pacManMoving);
 addEventListener("touchstart", pacManMoving);
 addEventListener("touchmove", pacManMoving);
 
+// Prevent scrolling
+document.body.addEventListener('touchmove', function(e){ e.preventDefault(); }, { passive: false });
+
 // animate() calls draw() then recursively calls itself
   // everytime the screen repaints via requestAnimationFrame().
 function animate() {
