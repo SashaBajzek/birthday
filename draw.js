@@ -4,29 +4,45 @@ function draw() {
     // draw() is called.
   var x = mouse.newX,
       y = mouse.newY;
+
+  setPacManImageFrame();
   
   pacMan.frame = frame;
-  pacMan.prevX = mouse.prevX;
-  pacMan.prevY = mouse.prevY;
-  pacMan.newX = x;
-  pacMan.newY = y;
-  pacMan.draw();
-
+  // pacMan.prevX = mouse.prevX;
+  // pacMan.prevY = mouse.prevY;
+  // pacMan.newX = x;
+  // pacMan.newY = y;
+  pacMan.targetX = x;
+  pacMan.targetY = y;
+  
+  if(pacMan.newX !== pacMan.targetX && pacMan.newY !== pacMan.targetY) {
+    pacMan.draw();
+  }
+  
   dots.forEach(dot => dot.draw());
-
 }
 
 var pacManMoving = function(event) {
-  if(frame > 10) {
-    frame = 0;
-  } else {
-    frame++;
-  }
-
   mouse.prevX = mouse.newX;
   mouse.prevY = mouse.newY;
   mouse.newX = event.pageX;
   mouse.newY = event.pageY;
+};
+
+var setPacManTargetLocation = function(event) {
+  var targetLocation = {
+    x: event.pageX,
+    y: event.pageY
+  };
+  return targetLocation;
+};
+
+var setPacManImageFrame = function() {
+  if(frame === 1) {
+    frame = 0;
+  } else {
+    frame = 1;
+  }
 };
 
 addEventListener("mousemove", pacManMoving);
@@ -40,8 +56,8 @@ document.body.addEventListener('touchmove', function(e){ e.preventDefault(); }, 
   // everytime the screen repaints via requestAnimationFrame().
 function animate() {
   draw();
-  requestAnimationFrame(animate);
+  //requestAnimationFrame(animate);
 }
 
 // And get it started by calling animate().
-animate();
+var intervalIDAnimate = window.setInterval(animate, 500);

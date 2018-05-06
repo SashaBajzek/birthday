@@ -46,7 +46,7 @@ for(var i=0; i<10; i++) {
 }
 
 Dot.prototype.draw = function() {
-  if(Math.abs(mouse.newX - this.x) < 10 && Math.abs(mouse.newY - this.y) < 10 ) {
+  if(Math.abs(pacMan.newX - this.x) < 10 && Math.abs(pacMan.newY - this.y) < 10 ) {
     this.node.style.backgroundColor = "black";
   }
 };
