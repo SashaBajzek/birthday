@@ -47,6 +47,6 @@ for(var i=0; i<gameboard.columns; i++) {
 
 Dot.prototype.draw = function() {
   if(Math.abs(pacMan.currentX - this.x) < 10 && Math.abs(pacMan.currentY - this.y) < 10 ) {
-    this.node.style.backgroundColor = "black";
+    this.node.classList.add("eaten");
   }
 };

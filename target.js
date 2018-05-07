@@ -1,6 +1,6 @@
 var target = {
-  x: 0,
-  y: 0,
+  x: gameboard.layout.offsetLeft,
+  y: gameboard.layout.offsetTop,
   draw: targetDraw,
   node: (function(){
     var n = document.createElement("div");

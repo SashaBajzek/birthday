@@ -1,4 +1,5 @@
 .dot__large {
+  animation: flash 3s infinite linear;
   background-color: rgb(253, 183, 153);
   border-radius: 5px;
   height: 10px;
@@ -8,6 +9,18 @@
   /* TODO: Make large dots flash */
 }
 
+@keyframes flash {
+  0% {
+    background-color: rgb(253, 183, 153);
+  }
+  90% {
+    background-color: rgb(253, 183, 153);
+  }
+  95% {
+    background-color: black;
+  }
+}
+
 .dot__small {
   background-color: rgb(253, 183, 153);
   border-radius: 2px;
@@ -15,4 +28,9 @@
   position: absolute;
   width: 4px;
   z-index: -1;
+}
+
+.eaten {
+  animation: none;
+  background-color: black;
 }
