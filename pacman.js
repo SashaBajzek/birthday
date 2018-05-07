@@ -26,8 +26,8 @@ function pacManDraw() {
 
   setLocation();
 
-  pacMan.node.style.left = pacMan.currentX - 7 + "px";
-  pacMan.node.style.top = pacMan.currentY - 7 + "px";
+  pacMan.node.style.left = pacMan.currentX - 3 + "px";
+  pacMan.node.style.top = pacMan.currentY - 3 + "px";
 
   
   if(pacMan.mouthOpen) {

@@ -1,23 +1,26 @@
 .dot__large {
-  animation: flash 3s infinite linear;
   background-color: rgb(253, 183, 153);
-  border-radius: 5px;
-  height: 10px;
+  border-radius: 8px;
+  height: 16px;
   position: absolute;
-  width: 10px;
+  width: 16px;
   z-index: -1;
   /* TODO: Make large dots flash */
+}
+
+.dot__flashing {
+  animation: flash .5s infinite linear;
 }
 
 @keyframes flash {
   0% {
     background-color: rgb(253, 183, 153);
   }
-  90% {
-    background-color: rgb(253, 183, 153);
-  }
-  95% {
+  50% {
     background-color: black;
+  }
+  100% {
+    background-color: rgb(253, 183, 153);
   }
 }
 

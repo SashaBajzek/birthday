@@ -18,18 +18,24 @@ var Dot = function(x, y, className) {
   }());
 };
 
+// Junction dots
 for(var i=0; i<gameboard.columns; i++) {
   for(var j=0; j<gameboard.rows; j++){
-    var dot = new Dot(i * gameboard.spacing, j * gameboard.spacing, "dot__large");
+    if(i % 2 === 0 && j % 2 === 0) {
+      var dot = new Dot(i * gameboard.spacing, j * gameboard.spacing, "dot__large dot__flashing");
+    } else {
+      var dot = new Dot(i * gameboard.spacing + 6, j * gameboard.spacing + 6, "dot__small");
+    }
     dots.push(dot);
   }
 }
 
+// Intermediate dots
 for(var i=0; i<((gameboard.columns - 1) * gameboard.minorTicks); i++) {
   for(var j=0; j<gameboard.rows; j++){
     // i%10 != 0 ensures small dots aren't under large dots
     if(i % gameboard.minorTicks != 0) {
-      var dot = new Dot(i * gameboard.spacing / gameboard.minorTicks + 3, j * gameboard.spacing + 3, "dot__small");
+      var dot = new Dot(i * gameboard.spacing / gameboard.minorTicks + 6, j * gameboard.spacing + 6, "dot__small");
       dots.push(dot);
     }
   }
@@ -39,7 +45,7 @@ for(var i=0; i<gameboard.columns; i++) {
   for(var j=0; j<((gameboard.rows - 1) * gameboard.minorTicks); j++){
     // j%10 != 0 ensures small dots aren't under large dots
     if(j % gameboard.minorTicks != 0) {
-      var dot = new Dot(i * gameboard.spacing + 3, j * gameboard.spacing / gameboard.minorTicks + 3, "dot__small");
+      var dot = new Dot(i * gameboard.spacing + 6, j * gameboard.spacing / gameboard.minorTicks + 6, "dot__small");
       dots.push(dot);
     }
   }

@@ -11,6 +11,6 @@ var target = {
 };
 
 function targetDraw() {
-  target.node.style.left = target.x - 7 + "px";
-  target.node.style.top = target.y - 7 + "px";
+  target.node.style.left = target.x + 6 + "px";
+  target.node.style.top = target.y + 6 + "px";
 };

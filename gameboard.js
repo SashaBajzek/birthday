@@ -10,7 +10,7 @@ var gameboard = {
 };
 
 if(window.innerWidth < 640) {
-  gameboard.spacing = 50;
+  gameboard.spacing = 100;
   gameboard.minorTicks = 5;
 }
 
