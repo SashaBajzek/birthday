@@ -2,7 +2,7 @@ var gameboard = {
   columns: 0,
   height: window.innerHeight,
   layout: [],
-  minorTicks: 10,
+  minorTicks: 5,
   movementSpace: 0,
   rows: 0,
   spacing: 100,

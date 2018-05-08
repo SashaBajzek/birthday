@@ -1,11 +1,9 @@
 .dot__large {
-  background-color: rgb(253, 183, 153);
-  border-radius: 8px;
+  background: center / contain no-repeat url(./images/dots/dotLarge.svg);
   height: 16px;
   position: absolute;
   width: 16px;
   z-index: -1;
-  /* TODO: Make large dots flash */
 }
 
 .dot__flashing {
@@ -14,19 +12,19 @@
 
 @keyframes flash {
   0% {
-    background-color: rgb(253, 183, 153);
+    background: center / contain no-repeat url(./images/dots/dotLarge.svg);
   }
   50% {
-    background-color: black;
+    background: black;
+    background-image: none;
   }
   100% {
-    background-color: rgb(253, 183, 153);
+    background: center / contain no-repeat url(./images/dots/dotLarge.svg);
   }
 }
 
 .dot__small {
-  background-color: rgb(253, 183, 153);
-  border-radius: 2px;
+  background: center / contain no-repeat url(./images/dots/dotSmall.svg);
   height: 4px;
   position: absolute;
   width: 4px;
@@ -35,5 +33,6 @@
 
 .eaten {
   animation: none;
-  background-color: black;
+  background: black;
+  background-image: none;
 }
