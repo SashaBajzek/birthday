@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'MiniPixel7';
+  src: url('./fonts/mini_pixel-7.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+
 html {
   background: black;
   overflow: hidden;
@@ -16,21 +22,20 @@ body {
 
 h1 {
   background: black;
-  color: rgb(27, 34, 164);
-  font-family: Helvetica, sans-serif;
-  font-size: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
+  font-family: MiniPixel7, Helvetica, sans-serif;
+  font-size: 80px;
+  letter-spacing: 5px;
   margin: 0 auto;
+  padding: 10px 20px 10px 30px;
 }
 
 .birthday {
   animation: birthdayColors 10s infinite ease-in;
   background: black;
   transition: color 10s;
-}
-
-.pacman {
-  height: 20px;
-  width: 20px;
 }
 
 @keyframes birthdayColors {
@@ -41,20 +46,14 @@ h1 {
   100% {color: #122685;}
 }
 
-@media (min-width: 480px) {
-  h1 {
-    font-size: 32px;
-  }
-}
-
 @media (min-width: 768px) {
   h1 {
-    font-size: 40px;
+    font-size: 100px;
   }
 }
 
 @media (min-width: 992px) {
   h1 {
-    font-size: 60px;
+    font-size: 100px;
   }
 }
