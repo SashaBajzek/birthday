@@ -1,5 +1,5 @@
 .dot__large {
-  background: center / contain no-repeat url(./images/dots/dotLarge.svg);
+  background: center / contain no-repeat url(../images/dots/dotLarge.svg);
   height: 16px;
   position: absolute;
   width: 16px;
@@ -12,19 +12,19 @@
 
 @keyframes flash {
   0% {
-    background: center / contain no-repeat url(./images/dots/dotLarge.svg);
+    background: center / contain no-repeat url(../images/dots/dotLarge.svg);
   }
   50% {
     background: black;
     background-image: none;
   }
   100% {
-    background: center / contain no-repeat url(./images/dots/dotLarge.svg);
+    background: center / contain no-repeat url(../images/dots/dotLarge.svg);
   }
 }
 
 .dot__small {
-  background: center / contain no-repeat url(./images/dots/dotSmall.svg);
+  background: center / contain no-repeat url(../images/dots/dotSmall.svg);
   height: 4px;
   position: absolute;
   width: 4px;

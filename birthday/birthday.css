@@ -1,25 +1,3 @@
-@font-face {
-  font-family: 'MiniPixel7';
-  src: url('./fonts/mini_pixel-7.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-}
-
-
-html {
-  background: black;
-  overflow: hidden;
-}
-
-body {
-  align-items: center;
-  box-sizing: border-box;
-  display: flex;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
-}
-
 h1 {
   background: black;
   border: 1px solid white;
