@@ -1,10 +1,14 @@
 import * as React from 'react';
 import './Pacman.css';
 
-class Pacman extends React.Component {
+class Pacman extends React.Component<any, any> {
+  public state = {
+    direction: "left",
+    mouthOpen: true
+  }
   public render() {
     return (
-      <div className='Pacman' />
+      <div className={`Pacman Pacman--${this.state.direction} ${this.state.mouthOpen ? 'Pacman--open' : 'Pacman--closed'}`} />
     );
   }
 }
@@ -46,24 +50,6 @@ function pacManDraw() {
   pacMan.node.style.left = pacMan.currentX - 3 + "px";
   pacMan.node.style.top = pacMan.currentY - 3 + "px";
 
-  
-  if(pacMan.mouthOpen) {
-    pacMan.mouthOpen = false;
-    pacMan.node.style.background = "center / contain no-repeat url(./images/pacman/Pac-Man.svg)";
-  } else {
-    pacMan.mouthOpen = true;
-    pacMan.node.style.background = "center / contain no-repeat url(./images/pacman/Pac-Man__Closed.svg)";
-  }
-  
-  if(pacMan.direction === "right") {
-    pacMan.node.style.transform = "rotate(180deg)";
-  } else if(pacMan.direction === "left") {
-    pacMan.node.style.transform = "rotate(0deg)";
-  } else if(pacMan.direction === "down") {
-    pacMan.node.style.transform = "rotate(-90deg)";
-  } else if(pacMan.direction === "up") {
-    pacMan.node.style.transform = "rotate(90deg)";
-  }
 };
 
 function setLocation() {
