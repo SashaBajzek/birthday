@@ -1,0 +1,38 @@
+h1,
+h2 {
+  background: black;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
+  font-family: MiniPixel7, Helvetica, sans-serif;
+  font-size: 80px;
+  letter-spacing: 5px;
+  margin: 0 auto;
+  padding: 10px 20px 10px 30px;
+}
+
+.birthday {
+  animation: birthdayColors 10s infinite ease-in;
+  background: black;
+  transition: color 10s;
+}
+
+@keyframes birthdayColors {
+  0% {color: #122685;}
+  25% {color: #198512;}
+  50% {color: #852612;}
+  75% {color: #586221;}
+  100% {color: #122685;}
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 100px;
+  }
+}
+
+@media (min-width: 992px) {
+  h1 {
+    font-size: 100px;
+  }
+}
