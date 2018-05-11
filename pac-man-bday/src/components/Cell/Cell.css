@@ -1,0 +1,38 @@
+.Cell {
+  align-items: center;
+  display: flex;
+  height: 30px;
+  width: 30px;
+}
+
+.wall--top {
+  border-top: 1px solid rgb(27, 34, 164);
+}
+
+.wall--right {
+  border-right: 1px solid rgb(27, 34, 164);
+}
+
+.wall--bottom {
+  border-bottom: 1px solid rgb(27, 34, 164);
+}
+
+.wall--left {
+  border-left: 1px solid rgb(27, 34, 164);
+}
+
+.corner--NE {
+  border-top-right-radius: 10px;
+}
+
+.corner--SE {
+  border-bottom-right-radius: 10px;
+}
+
+.corner--SW {
+  border-bottom-left-radius: 10px;
+}
+
+.corner--NW {
+  border-top-left-radius: 10px;
+}

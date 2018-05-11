@@ -1,9 +1,12 @@
+.Dot {
+  margin: auto;
+  z-index: -1;
+}
+
 .dot__large {
   background: center / contain no-repeat url(../../images/dots/dotLarge.svg);
   height: 16px;
-  position: absolute;
   width: 16px;
-  z-index: -1;
 }
 
 .dot__large--flashing {
@@ -26,9 +29,7 @@
 .dot__small {
   background: center / contain no-repeat url(../../images/dots/dotSmall.svg);
   height: 4px;
-  position: absolute;
   width: 4px;
-  z-index: -1;
 }
 
 .eaten {

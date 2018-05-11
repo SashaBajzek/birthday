@@ -17,9 +17,7 @@ class Dot extends React.Component<IProps, object> {
   public render() {
     const { dotSize } = this.props;
     return (
-      <div className='Dot'>
-        <div className={this.getClassNames(dotSize)} />
-      </div>
+      <div className={`Dot ${this.getClassNames(dotSize)}`} />
     );
   }
 }
