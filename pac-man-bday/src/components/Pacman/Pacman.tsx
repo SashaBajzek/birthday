@@ -2,48 +2,12 @@ import * as React from 'react';
 import './Pacman.css';
 
 interface IProps {
-  onMovePacmanDown: any,
-  onMovePacmanLeft: any,
-  onMovePacmanRight: any,
-  onMovePacmanUp: any,
   pacmanDirection: string,
   pacmanMouth: boolean,
   pacmanState: any
 }
 
 class Pacman extends React.Component<IProps, any> {
-
-  // public handleKeyDown (event: any) {
-  //   switch( event.keyCode ) {
-  //       case 40:
-  //       console.log("down");
-  //         this.props.onMovePacmanDown();
-  //         break;
-  //       case 37:
-  //       console.log("left");
-  //         this.props.onMovePacmanLeft();
-  //         break;
-  //       case 39:
-  //       console.log("right");
-  //         this.props.onMovePacmanRight();
-  //         break;
-  //       case 38:
-  //       console.log("up");
-  //         this.props.onMovePacmanUp();
-  //         break;
-  //       default: 
-  //         break;
-  //   }
-  // }
-
-  // public componentDidMount() {
-  //   document.addEventListener("keydown", this.handleKeyDown.bind(this));
-  // }
-
-  // public componentWillUnmount() {
-  //   document.removeEventListener("keydown", this.handleKeyDown.bind(this));
-  // }
-
   public render() {
     const { pacmanDirection, pacmanMouth } = this.props;
     return (
