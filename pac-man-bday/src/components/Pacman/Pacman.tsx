@@ -3,8 +3,7 @@ import './Pacman.css';
 
 interface IProps {
   pacmanDirection: string,
-  pacmanMouth: boolean,
-  pacmanState: any
+  pacmanMouth: boolean
 }
 
 class Pacman extends React.Component<IProps, any> {

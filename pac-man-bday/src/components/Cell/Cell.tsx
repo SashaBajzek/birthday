@@ -10,8 +10,6 @@ interface IProps {
   dot: string,
   key: string,
   item: string,
-  pacman: boolean,
-  pacmanState: object,
   pacmanX: number,
   pacmanY: number,
   traversable: boolean
@@ -69,11 +67,11 @@ class Cell extends React.Component<IProps, any> {
   };
 
   public render() {
-    const { cellX, cellY, dot, pacmanState, pacmanX, pacmanY } = this.props;
+    const { cellX, cellY, dot, pacmanX, pacmanY } = this.props;
     return (
       <div className={`Cell ${this.getClasses()}`}>
         <Dot dotSize={dot} />
-        { cellX === pacmanX && cellY === pacmanY ? <PacmanContainer pacmanState={pacmanState}/> : "" }
+        { cellX === pacmanX && cellY === pacmanY ? <PacmanContainer /> : "" }
       </div>
     );
   }

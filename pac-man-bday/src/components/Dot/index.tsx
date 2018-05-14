@@ -6,12 +6,8 @@ interface IProps {
 }
 
 class Dot extends React.Component<IProps, object> {
-  public state = {
-    eaten: false
-  };
-
   public getClassNames = (dotSize: string) => (
-    this.state.eaten ? `dot__${dotSize} eaten` : `dot__${dotSize} dot__${dotSize}--flashing`
+    `dot__${dotSize} dot__${dotSize}--flashing`
   )
 
   public render() {

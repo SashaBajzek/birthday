@@ -3,6 +3,8 @@ import { IStoreState } from '../types/index';
 
 import { MovePacmanAction } from '../actions';
 
+import update from 'immutability-helper';
+
 function getCurrentCell(state: IStoreState) {
   let cell = state.cells.filter((obj: any) => {
     return obj.x === state.pacmanX
@@ -14,6 +16,13 @@ function getCurrentCell(state: IStoreState) {
   return cell[0];  
 }
 
+function getCurrentCellId(state: IStoreState) {
+  const cellId = state.cells.findIndex((obj: any) => {
+    return obj.x === state.pacmanX && obj.y === state.pacmanY
+  });
+  return cellId;  
+}
+
 function moveDown(state: IStoreState) {
   if (getCurrentCell(state).borders[2] === 0) {
     let newPacmanY: number = state.pacmanY;
@@ -22,12 +31,13 @@ function moveDown(state: IStoreState) {
     } else {
       newPacmanY += 1;
     }
-    return {
-      ...state,
-      pacmanDirection: "down", 
-      pacmanMouth: !state.pacmanMouth,
-      pacmanY: newPacmanY
-    }
+    const cellId = getCurrentCellId(state);
+    return update(state, {
+      cells: {[cellId]: {dot: {$set: "none"}}},
+      pacmanDirection: {$set: "down"}, 
+      pacmanMouth: {$set: !state.pacmanMouth},
+      pacmanY: {$set: newPacmanY},
+    })
   }
   else {
     return {
@@ -44,12 +54,13 @@ function moveLeft(state: IStoreState) {
     } else {
       newPacmanX -= 1;
     }
-    return {
-      ...state,
-      pacmanDirection: "left",
-      pacmanMouth: !state.pacmanMouth,
-      pacmanX: newPacmanX
-    }
+    const cellId = getCurrentCellId(state);
+    return update(state, {
+      cells: {[cellId]: {dot: {$set: "none"}}},
+      pacmanDirection: {$set: "left"}, 
+      pacmanMouth: {$set: !state.pacmanMouth},
+      pacmanX: {$set: newPacmanX}
+    })
   }
   else {
     return {
@@ -66,12 +77,13 @@ function moveRight(state: IStoreState) {
     } else {
       newPacmanX += 1;
     }
-    return {
-      ...state, 
-      pacmanDirection: "right",
-      pacmanMouth: !state.pacmanMouth,
-      pacmanX: newPacmanX
-    }
+    const cellId = getCurrentCellId(state);
+    return update(state, {
+      cells: {[cellId]: {dot: {$set: "none"}}},
+      pacmanDirection: {$set: "right"}, 
+      pacmanMouth: {$set: !state.pacmanMouth},
+      pacmanX: {$set: newPacmanX}
+    })
   }
   else {
     return {
@@ -88,12 +100,13 @@ function moveUp(state: IStoreState) {
     } else {
       newPacmanY -= 1;
     }
-    return {
-      ...state,
-      pacmanDirection: "up",
-      pacmanMouth: !state.pacmanMouth,
-      pacmanY: newPacmanY
-    }
+    const cellId = getCurrentCellId(state);
+    return update(state, {
+      cells: {[cellId]: {dot: {$set: "none"}}},
+      pacmanDirection: {$set: "up"}, 
+      pacmanMouth: {$set: !state.pacmanMouth},
+      pacmanY: {$set: newPacmanY}
+    })
   }
   else {
     return {
