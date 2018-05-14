@@ -1,13 +1,19 @@
 import * as React from 'react';
 import Dot from '../Dot';
+import PacmanContainer from '../Pacman/PacmanContainer';
 import './Cell.css';
 
 interface IProps {
   borders: number[],
+  cellX: number,
+  cellY: number,
   dot: string,
   key: string,
   item: string,
-  pacman: string,
+  pacman: boolean,
+  pacmanState: object,
+  pacmanX: number,
+  pacmanY: number,
   traversable: boolean
 }
 
@@ -58,15 +64,16 @@ class Cell extends React.Component<IProps, any> {
     if(borders[3] && borders[0]) {
       wallClasses += ' corner--NW'
     }
-
+    
     return wallClasses;
   };
 
   public render() {
-    const { dot } = this.props;
+    const { cellX, cellY, dot, pacmanState, pacmanX, pacmanY } = this.props;
     return (
       <div className={`Cell ${this.getClasses()}`}>
         <Dot dotSize={dot} />
+        { cellX === pacmanX && cellY === pacmanY ? <PacmanContainer pacmanState={pacmanState}/> : "" }
       </div>
     );
   }

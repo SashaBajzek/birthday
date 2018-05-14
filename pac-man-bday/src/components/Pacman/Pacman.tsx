@@ -1,14 +1,49 @@
 import * as React from 'react';
 import './Pacman.css';
 
-class Pacman extends React.Component<any, any> {
-  public state = {
-    direction: "left",
-    mouthOpen: true
+interface IProps {
+  onMovePacmanDown: any,
+  onMovePacmanLeft: any,
+  onMovePacmanRight: any,
+  onMovePacmanUp: any,
+  pacmanDirection: string,
+  pacmanMouth: boolean,
+  pacmanState: any
+}
+
+class Pacman extends React.Component<IProps, any> {
+
+  public handleKeyDown (event: any) {
+    switch( event.keyCode ) {
+        case 40:
+          this.props.onMovePacmanDown();
+          break;
+        case 37:
+          this.props.onMovePacmanLeft();
+          break;
+        case 39:
+          this.props.onMovePacmanRight();
+          break;
+        case 38:
+          this.props.onMovePacmanUp();
+          break;
+        default: 
+          break;
+    }
   }
+
+  public componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+  }
+
+  public componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyDown.bind(this));
+  }
+
   public render() {
+    const { pacmanDirection, pacmanMouth } = this.props;
     return (
-      <div className={`Pacman Pacman--${this.state.direction} ${this.state.mouthOpen ? 'Pacman--open' : 'Pacman--closed'}`} />
+      <div className={`Pacman Pacman--${pacmanDirection} ${pacmanMouth ? 'Pacman--open' : 'Pacman--closed'}`} />
     );
   }
 }
