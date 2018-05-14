@@ -11,7 +11,7 @@ class Scoreboard extends React.Component<IProps, any> {
     const { score } = this.props;
     return (
       <div className='Scoreboard'>
-        <h3>Score: {score}</h3>
+        <h3 className='Scoreboard__heading'>Score: {score}</h3>
       </div>
     );
   }

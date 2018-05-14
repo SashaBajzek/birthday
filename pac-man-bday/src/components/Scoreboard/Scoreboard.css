@@ -1,3 +1,15 @@
-.Scoreboard {
+.Scoreboard__heading {
   color: white;
+  font-family: MiniPixel7, Helvetica, sans-serif;
+  font-size: 40px;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .Scoreboard__heading {
+    font-size: 50px;
+    padding: 20px;
+  }
 }

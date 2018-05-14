@@ -103,9 +103,11 @@ class App extends React.Component<IProps, any> {
     return (
       <div className='App'>
         <div>
-          <h1>Is it Jeffrey's Birthday?</h1>
-          { isTodayBirthday(birthday) ? <h2 className='birthday'>YES, Happy Birthday Jeffrey!</h2> :
-          <h2>NO</h2> }
+          <header className='header'>
+            <h1 className='header__heading'>Is it Jeffrey's Birthday?</h1>
+            { isTodayBirthday(birthday) ? <h2 className='header__heading birthday'>YES, Happy Birthday Jeffrey!</h2> :
+            <h2 className='header__heading'>NO</h2> }
+          </header>
           <ScoreboardContainer />
           <GameboardContainer />
         </div>

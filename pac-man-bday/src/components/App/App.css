@@ -1,14 +1,23 @@
-h1,
-h2 {
+.App {
+  width: 100%;
+}
+
+.header {
   background: black;
   border: 1px solid white;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  color: white;
+}
+
+.header__heading {
+  background: black;
   color: white;
   font-family: MiniPixel7, Helvetica, sans-serif;
-  font-size: 80px;
+  font-size: 30px;
   letter-spacing: 5px;
   margin: 0 auto;
-  padding: 10px 20px 10px 30px;
+  padding: 10px;
+  text-align: center;
 }
 
 .birthday {
@@ -26,13 +35,14 @@ h2 {
 }
 
 @media (min-width: 768px) {
-  h1 {
-    font-size: 100px;
+  .header__heading {
+    font-size: 80px;
+    padding: 20;
   }
 }
 
 @media (min-width: 992px) {
-  h1 {
-    font-size: 100px;
+  .header__heading {
+    font-size: 80px;
   }
 }
