@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import App from './components/App';
+import AppContainer from './components/App/AppContainer';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -20,7 +20,7 @@ const store = createStore<IStoreState, MovePacmanAction, any, any>(pacman, {
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AppContainer />
   </Provider>,
   document.getElementById('root') as HTMLElement
 );

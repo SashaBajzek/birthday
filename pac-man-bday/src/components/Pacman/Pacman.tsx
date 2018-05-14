@@ -13,32 +13,36 @@ interface IProps {
 
 class Pacman extends React.Component<IProps, any> {
 
-  public handleKeyDown (event: any) {
-    switch( event.keyCode ) {
-        case 40:
-          this.props.onMovePacmanDown();
-          break;
-        case 37:
-          this.props.onMovePacmanLeft();
-          break;
-        case 39:
-          this.props.onMovePacmanRight();
-          break;
-        case 38:
-          this.props.onMovePacmanUp();
-          break;
-        default: 
-          break;
-    }
-  }
+  // public handleKeyDown (event: any) {
+  //   switch( event.keyCode ) {
+  //       case 40:
+  //       console.log("down");
+  //         this.props.onMovePacmanDown();
+  //         break;
+  //       case 37:
+  //       console.log("left");
+  //         this.props.onMovePacmanLeft();
+  //         break;
+  //       case 39:
+  //       console.log("right");
+  //         this.props.onMovePacmanRight();
+  //         break;
+  //       case 38:
+  //       console.log("up");
+  //         this.props.onMovePacmanUp();
+  //         break;
+  //       default: 
+  //         break;
+  //   }
+  // }
 
-  public componentDidMount() {
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
-  }
+  // public componentDidMount() {
+  //   document.addEventListener("keydown", this.handleKeyDown.bind(this));
+  // }
 
-  public componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleKeyDown.bind(this));
-  }
+  // public componentWillUnmount() {
+  //   document.removeEventListener("keydown", this.handleKeyDown.bind(this));
+  // }
 
   public render() {
     const { pacmanDirection, pacmanMouth } = this.props;
