@@ -21,6 +21,7 @@ const store = createStore<IStoreState, MovePacmanAction, any, any>(pacman, {
   pacmanMouth: true,
   pacmanX: 0,
   pacmanY: 0,
+  score: 0
 });
 
 ReactDOM.render(

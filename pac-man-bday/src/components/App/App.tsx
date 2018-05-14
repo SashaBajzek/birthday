@@ -2,6 +2,7 @@
 import * as React from 'react';
 
 import GameboardContainer from '../Gameboard/GameboardContainer';
+import ScoreboardContainer from '../Scoreboard/ScoreboardContainer';
 import './App.css';
 
 interface IBirthday {
@@ -105,6 +106,7 @@ class App extends React.Component<IProps, any> {
           <h1>Is it Jeffrey's Birthday?</h1>
           { isTodayBirthday(birthday) ? <h2 className='birthday'>YES, Happy Birthday Jeffrey!</h2> :
           <h2>NO</h2> }
+          <ScoreboardContainer />
           <GameboardContainer />
         </div>
       </div>

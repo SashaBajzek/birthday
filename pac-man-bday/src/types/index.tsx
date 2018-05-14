@@ -5,5 +5,6 @@ export interface IStoreState {
   pacmanMouth: boolean,
   pacmanX: number,
   pacmanY: number,
+  score: number,
   cells: any[]
 }

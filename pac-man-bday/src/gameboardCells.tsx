@@ -1,7 +1,7 @@
 const gameboardCells = [
   {
     borders: [1, 0, 0, 1],
-    dot: "large",
+    dot: "none",
     id: "r0c0",
     item: "none",
     traversable: true,

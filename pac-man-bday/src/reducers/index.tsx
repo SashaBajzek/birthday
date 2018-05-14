@@ -16,27 +16,52 @@ function getCurrentCell(state: IStoreState) {
   return cell[0];  
 }
 
-function getCurrentCellId(state: IStoreState) {
+function getCell(state: IStoreState, x: number, y: number) {
+  let cell = state.cells.filter((obj: any) => {
+    return obj.x === x
+  });
+  cell = cell.filter((obj: any) => {
+    return obj.y === y
+  });
+
+  return cell[0];  
+}
+
+function getCellId(state: IStoreState, x: number, y: number) {
   const cellId = state.cells.findIndex((obj: any) => {
-    return obj.x === state.pacmanX && obj.y === state.pacmanY
+    return obj.x === x && obj.y === y
   });
   return cellId;  
 }
 
+function getItemValue(cell: any) {
+  if(cell.dot === "large") {
+    return 10;
+  } else if(cell.dot === "small") {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 function moveDown(state: IStoreState) {
-  if (getCurrentCell(state).borders[2] === 0) {
+  const currentCell = getCurrentCell(state);
+  if (currentCell.borders[2] === 0) {
     let newPacmanY: number = state.pacmanY;
     if(state.pacmanY + 1 === state.gameboardColumns) {
       newPacmanY = 0;
     } else {
       newPacmanY += 1;
     }
-    const cellId = getCurrentCellId(state);
+    const nextCellId = getCellId(state, state.pacmanX, newPacmanY);
+    const nextCell = getCell(state, state.pacmanX, newPacmanY);
+    const itemValue = getItemValue(nextCell);
     return update(state, {
-      cells: {[cellId]: {dot: {$set: "none"}}},
+      cells: {[nextCellId]: {dot: {$set: "none"}}},
       pacmanDirection: {$set: "down"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanY: {$set: newPacmanY},
+      score: {$set: state.score +itemValue}
     })
   }
   else {
@@ -47,19 +72,23 @@ function moveDown(state: IStoreState) {
 }
 
 function moveLeft(state: IStoreState) {
-  if (getCurrentCell(state).borders[3] === 0) {
+  const currentCell = getCurrentCell(state);
+  if (currentCell.borders[3] === 0) {
     let newPacmanX: number = state.pacmanX;
     if(state.pacmanX - 1 < 0) {
       newPacmanX = state.gameboardColumns - 1;
     } else {
       newPacmanX -= 1;
     }
-    const cellId = getCurrentCellId(state);
+    const nextCellId = getCellId(state, newPacmanX, state.pacmanY);
+    const nextCell = getCell(state, newPacmanX, state.pacmanY);
+    const itemValue = getItemValue(nextCell);
     return update(state, {
-      cells: {[cellId]: {dot: {$set: "none"}}},
+      cells: {[nextCellId]: {dot: {$set: "none"}}},
       pacmanDirection: {$set: "left"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
-      pacmanX: {$set: newPacmanX}
+      pacmanX: {$set: newPacmanX},
+      score: {$set: state.score +itemValue}
     })
   }
   else {
@@ -70,19 +99,23 @@ function moveLeft(state: IStoreState) {
 }
 
 function moveRight(state: IStoreState) {
-  if (getCurrentCell(state).borders[1] === 0) {
+  const currentCell = getCurrentCell(state);
+  if (currentCell.borders[1] === 0) {
     let newPacmanX: number = state.pacmanX;
     if(state.pacmanX + 1 === state.gameboardColumns) {
       newPacmanX = 0;
     } else {
       newPacmanX += 1;
     }
-    const cellId = getCurrentCellId(state);
+    const nextCellId = getCellId(state, newPacmanX, state.pacmanY);
+    const nextCell = getCell(state, newPacmanX, state.pacmanY);
+    const itemValue = getItemValue(nextCell);
     return update(state, {
-      cells: {[cellId]: {dot: {$set: "none"}}},
+      cells: {[nextCellId]: {dot: {$set: "none"}}},
       pacmanDirection: {$set: "right"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
-      pacmanX: {$set: newPacmanX}
+      pacmanX: {$set: newPacmanX},
+      score: {$set: state.score +itemValue}
     })
   }
   else {
@@ -93,19 +126,23 @@ function moveRight(state: IStoreState) {
 }
 
 function moveUp(state: IStoreState) {
-  if (getCurrentCell(state).borders[0] === 0) {
+  const currentCell = getCurrentCell(state);
+  if (currentCell.borders[0] === 0) {
     let newPacmanY: number = state.pacmanY;
     if(state.pacmanY - 1 < 0) {
       newPacmanY = state.gameboardColumns - 1;
     } else {
       newPacmanY -= 1;
     }
-    const cellId = getCurrentCellId(state);
+    const nextCellId = getCellId(state, state.pacmanX, newPacmanY);
+    const nextCell = getCell(state, state.pacmanX, newPacmanY);
+    const itemValue = getItemValue(nextCell);
     return update(state, {
-      cells: {[cellId]: {dot: {$set: "none"}}},
+      cells: {[nextCellId]: {dot: {$set: "none"}}},
       pacmanDirection: {$set: "up"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
-      pacmanY: {$set: newPacmanY}
+      pacmanY: {$set: newPacmanY},
+      score: {$set: state.score +itemValue}
     })
   }
   else {
