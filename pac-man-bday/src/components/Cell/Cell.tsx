@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Dot from '../Dot';
 import PacmanContainer from '../Pacman/PacmanContainer';
+import Target from '../Target';
 import './Cell.css';
 
 interface IProps {
@@ -10,8 +11,11 @@ interface IProps {
   dot: string,
   key: string,
   item: string,
+  onSetTarget: any,
   pacmanX: number,
   pacmanY: number,
+  targetX: number,
+  targetY: number,
   traversable: boolean
 }
 
@@ -66,12 +70,17 @@ class Cell extends React.Component<IProps, any> {
     return wallClasses;
   };
 
+  public handleClick = () => (
+    this.props.onSetTarget(this.props.cellX, this.props.cellY)
+  )
+
   public render() {
-    const { cellX, cellY, dot, pacmanX, pacmanY } = this.props;
+    const { cellX, cellY, dot, pacmanX, pacmanY, targetX, targetY } = this.props;
     return (
-      <div className={`Cell ${this.getClasses()}`}>
+      <div className={`Cell ${this.getClasses()}`} onClick={this.handleClick}>
         <Dot dotSize={dot} />
         { cellX === pacmanX && cellY === pacmanY ? <PacmanContainer /> : "" }
+        { cellX === targetX && cellY === targetY ? <Target /> : "" }
       </div>
     );
   }

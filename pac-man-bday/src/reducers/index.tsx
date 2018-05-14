@@ -1,4 +1,4 @@
-import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP } from '../constants/index';
+import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP, SET_TARGET } from '../constants/index';
 import { IStoreState } from '../types/index';
 
 import { MovePacmanAction } from '../actions';
@@ -152,6 +152,13 @@ function moveUp(state: IStoreState) {
   }
 }
 
+function setTarget(state: IStoreState, newX: number, newY: number) {
+  return update(state, {
+    targetX: {$set: newX},
+    targetY: {$set: newY}
+  })
+}
+
 export function pacman(state: IStoreState, action: MovePacmanAction): IStoreState {
   switch (action.type) {
     case MOVE_PACMAN_DOWN:
@@ -162,6 +169,8 @@ export function pacman(state: IStoreState, action: MovePacmanAction): IStoreStat
       return moveRight(state);
     case MOVE_PACMAN_UP:
       return moveUp(state);
+    case SET_TARGET:
+      return setTarget(state, action.newX, action.newY);
   }
   return state;
 }

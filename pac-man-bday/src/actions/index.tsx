@@ -16,7 +16,13 @@ export interface IMovePacmanDown {
   type: constants.MOVE_PACMAN_DOWN;
 }
 
-export type MovePacmanAction = IMovePacmanLeft | IMovePacmanRight | IMovePacmanUp | IMovePacmanDown;
+export interface ISetTarget {
+  newX: number,
+  newY: number,
+  type: constants.SET_TARGET
+}
+
+export type MovePacmanAction = IMovePacmanLeft | IMovePacmanRight | IMovePacmanUp | IMovePacmanDown | ISetTarget;
 
 export function movePacmanLeft(): IMovePacmanLeft {
   return {
@@ -39,5 +45,13 @@ export function movePacmanUp(): IMovePacmanUp {
 export function movePacmanDown(): IMovePacmanDown {
   return {
     type: constants.MOVE_PACMAN_DOWN
+  }
+}
+
+export function setTarget(newX: number, newY: number): ISetTarget {
+  return {
+    newX,
+    newY,
+    type: constants.SET_TARGET
   }
 }

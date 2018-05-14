@@ -1,12 +1,21 @@
-import { connect } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
+import * as actions from '../../actions/';
 import { IStoreState } from '../../types/index';
 import Cell from './Cell';
 
-export function mapStateToProps({ pacmanX, pacmanY }: IStoreState) {
+export function mapStateToProps({ pacmanX, pacmanY, targetX, targetY }: IStoreState) {
   return {
     pacmanX,
-    pacmanY
+    pacmanY,
+    targetX,
+    targetY
   }
 }
 
-export default connect(mapStateToProps)(Cell);
+export function mapDispatchToProps(dispatch: Dispatch<actions.MovePacmanAction>) {
+  return {
+    onSetTarget: (newX: number, newY: number) => dispatch(actions.setTarget(newX, newY))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cell);
