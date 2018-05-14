@@ -50,34 +50,28 @@ class App extends React.Component<IProps, any> {
 
   public handleKeyDown (e: any) {
     switch( e.keyCode ) {
-        case 40:
-        console.log("down");
-          this.props.onMovePacmanDown();
-          break;
-        case 37:
-        console.log("left");
-          this.props.onMovePacmanLeft();
-          break;
-        case 39:
-        console.log("right");
-          this.props.onMovePacmanRight();
-          break;
-        case 38:
-        console.log("up");
-          this.props.onMovePacmanUp();
-          break;
-        default: 
-          break;
+      case 40:
+        this.props.onMovePacmanDown();
+        break;
+      case 37:
+        this.props.onMovePacmanLeft();
+        break;
+      case 39:
+        this.props.onMovePacmanRight();
+        break;
+      case 38:
+        this.props.onMovePacmanUp();
+        break;
+      default: 
+        break;
     }
   }
 
   public componentDidMount() {
-    console.log('adding listener')
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
   }
 
   public componentWillUnmount() {
-    console.log('removing listener')
     document.removeEventListener("keydown", this.handleKeyDown.bind(this));
   }
 

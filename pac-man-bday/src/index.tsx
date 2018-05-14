@@ -11,7 +11,12 @@ import { MovePacmanAction } from './actions/index';
 import { pacman } from './reducers/index';
 import { IStoreState } from './types/index';
 
+import gameboardCells from './gameboardCells';
+
 const store = createStore<IStoreState, MovePacmanAction, any, any>(pacman, {
+  cells: gameboardCells,
+  gameboardColumns: 10,
+  gameboardRows: 6,
   pacmanDirection: 'right',
   pacmanMouth: true,
   pacmanX: 0,
