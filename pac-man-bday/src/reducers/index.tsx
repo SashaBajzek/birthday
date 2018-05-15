@@ -1,4 +1,4 @@
-import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP, SET_TARGET, SET_TARGET_KEYBOARD } from '../constants/index';
+import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP, SET_STALLED, SET_TARGET, SET_TARGET_KEYBOARD } from '../constants/index';
 import { IStoreState } from '../types/index';
 
 import { MovePacmanAction } from '../actions';
@@ -61,6 +61,7 @@ function moveDown(state: IStoreState) {
       pacmanDirection: {$set: "down"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanY: {$set: newPacmanY},
+      pacmanYPrevious: {$set: state.pacmanY},
       score: {$set: state.score +itemValue}
     })
   }
@@ -88,6 +89,7 @@ function moveLeft(state: IStoreState) {
       pacmanDirection: {$set: "left"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanX: {$set: newPacmanX},
+      pacmanXPrevious: {$set: state.pacmanX},
       score: {$set: state.score +itemValue}
     })
   }
@@ -115,6 +117,7 @@ function moveRight(state: IStoreState) {
       pacmanDirection: {$set: "right"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanX: {$set: newPacmanX},
+      pacmanXPrevious: {$set: state.pacmanX},
       score: {$set: state.score +itemValue}
     })
   }
@@ -142,6 +145,7 @@ function moveUp(state: IStoreState) {
       pacmanDirection: {$set: "up"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanY: {$set: newPacmanY},
+      pacmanYPrevious: {$set: state.pacmanY},
       score: {$set: state.score +itemValue}
     })
   }
@@ -206,6 +210,12 @@ function setTargetKeyboard(state: IStoreState, direction: string) {
   })
 }
 
+function setStalled(state: IStoreState, stalled: boolean) {
+  return update(state, {
+    stalled: {$set: stalled}
+  })
+}
+
 export function pacman(state: IStoreState, action: MovePacmanAction): IStoreState {
   switch (action.type) {
     case MOVE_PACMAN_DOWN:
@@ -220,6 +230,8 @@ export function pacman(state: IStoreState, action: MovePacmanAction): IStoreStat
       return setTarget(state, action.newX, action.newY);
     case SET_TARGET_KEYBOARD:
       return setTargetKeyboard(state, action.direction);
+    case SET_STALLED:
+      return setStalled(state, action.stalled);
   }
   return state;
 }

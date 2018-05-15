@@ -20,8 +20,11 @@ const store = createStore<IStoreState, MovePacmanAction, any, any>(pacman, {
   pacmanDirection: 'right',
   pacmanMouth: true,
   pacmanX: 0,
+  pacmanXPrevious: -1,
   pacmanY: 0,
+  pacmanYPrevious: -1,
   score: 0,
+  stalled: false,
   targetVisible: false,
   targetX: 0,
   targetY: 0

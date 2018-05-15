@@ -27,7 +27,12 @@ export interface ISetTargetKeyboard {
   type: constants.SET_TARGET_KEYBOARD
 }
 
-export type MovePacmanAction = IMovePacmanLeft | IMovePacmanRight | IMovePacmanUp | IMovePacmanDown | ISetTarget | ISetTargetKeyboard;
+export interface ISetStalled {
+  stalled: boolean,
+  type: constants.SET_STALLED
+}
+
+export type MovePacmanAction = IMovePacmanLeft | IMovePacmanRight | IMovePacmanUp | IMovePacmanDown | ISetTarget | ISetTargetKeyboard | ISetStalled;
 
 export function movePacmanLeft(): IMovePacmanLeft {
   return {
@@ -65,5 +70,12 @@ export function setTargetKeyboard(direction: string): ISetTargetKeyboard {
   return {
     direction,
     type: constants.SET_TARGET_KEYBOARD
+  }
+}
+
+export function setStalled(stalled: boolean): ISetStalled {
+  return {
+    stalled,
+    type: constants.SET_STALLED
   }
 }

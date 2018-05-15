@@ -21,6 +21,11 @@ function isTodayBirthday(birthday: IBirthday) {
 }
 
 interface IProps {
+  columnEndDoor: boolean,
+  columnStartDoor: boolean,
+  currentCellBorders: number[],
+  gameboardColumns: number,
+  gameboardRows: number,
   onMovePacmanDown: any,
   onMovePacmanLeft: any,
   onMovePacmanRight: any,
@@ -28,6 +33,9 @@ interface IProps {
   pacmanX: number,
   pacmanY: number,
   onSetTargetKeyboard: any,
+  rowEndDoor: boolean,
+  rowStartDoor: boolean,
+  stalled: boolean,
   targetX: number,
   targetY: number
 }
@@ -39,19 +47,19 @@ class App extends React.Component<IProps, any> {
     switch( e.keyCode ) {
       case 40:
         this.props.onSetTargetKeyboard("down");
-        this.props.onMovePacmanDown();
+        this.pacmanMove();
         break;
       case 37:
         this.props.onSetTargetKeyboard("left");
-        this.props.onMovePacmanLeft();
+        this.pacmanMove();
         break;
       case 39:
         this.props.onSetTargetKeyboard("right");
-        this.props.onMovePacmanRight();
+        this.pacmanMove();
         break;
       case 38:
         this.props.onSetTargetKeyboard("up");
-        this.props.onMovePacmanUp();
+        this.pacmanMove();
         break;
       default: 
         break;
@@ -75,23 +83,49 @@ class App extends React.Component<IProps, any> {
 
   public pacmanMove() {
     const { 
+      columnEndDoor,
+      columnStartDoor,
+      currentCellBorders,
+      gameboardColumns,
+      gameboardRows,
       onMovePacmanDown,
       onMovePacmanLeft,
       onMovePacmanRight,
       onMovePacmanUp,
       pacmanX, 
       pacmanY, 
+      rowEndDoor,
+      rowStartDoor,
       targetX, 
       targetY } = this.props;
 
-    if(pacmanX < targetX) {
-      onMovePacmanRight()
+    const diffX = targetX - pacmanX;
+    const diffY = targetY - pacmanY;
+    const diffXAbs = Math.abs(diffX);
+    const diffYAbs = Math.abs(diffY);
+
+    if (diffXAbs === 0 && diffYAbs === 0) {
+      // if pacman at target, do nothing
+    } else if(pacmanX < 2 && targetX === gameboardColumns - 1 && !currentCellBorders[3] && rowStartDoor ) {
+      // if pacman is near door, go through it
+      onMovePacmanLeft();
+    } else if (pacmanX > gameboardColumns - 3 && targetX === 0 && !currentCellBorders[1] && rowEndDoor ) {
+      // if pacman is near door, go through it
+      onMovePacmanRight();
+    } else if (pacmanY < 2 && targetY === gameboardRows - 1 && !currentCellBorders[0] && columnStartDoor ) {
+      // if pacman is near door, go through it
+      onMovePacmanUp();
+    } else if (pacmanY > gameboardRows - 3 && targetY === 0 && !currentCellBorders[2] && columnEndDoor ) {
+      // if pacman is near door, go through it
+      onMovePacmanDown();
+    } else if(pacmanX < targetX) {
+      onMovePacmanRight();
     } else if (pacmanX > targetX) {
-      onMovePacmanLeft()
+      onMovePacmanLeft();
     } else if (pacmanY > targetY) {
-      onMovePacmanUp()
+      onMovePacmanUp();
     } else if (pacmanY < targetY) {
-      onMovePacmanDown()
+      onMovePacmanDown();
     }
   }
 
