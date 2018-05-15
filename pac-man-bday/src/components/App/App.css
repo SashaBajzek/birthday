@@ -1,0 +1,48 @@
+.App {
+  width: 100%;
+}
+
+.header {
+  background: black;
+  border: 1px solid white;
+  /* border-radius: 10px; */
+  color: white;
+}
+
+.header__heading {
+  background: black;
+  color: white;
+  font-family: MiniPixel7, Helvetica, sans-serif;
+  font-size: 30px;
+  letter-spacing: 5px;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.birthday {
+  animation: birthdayColors 10s infinite ease-in;
+  background: black;
+  transition: color 10s;
+}
+
+@keyframes birthdayColors {
+  0% {color: #122685;}
+  25% {color: #198512;}
+  50% {color: #852612;}
+  75% {color: #586221;}
+  100% {color: #122685;}
+}
+
+@media (min-width: 768px) {
+  .header__heading {
+    font-size: 80px;
+    padding: 20;
+  }
+}
+
+@media (min-width: 992px) {
+  .header__heading {
+    font-size: 80px;
+  }
+}

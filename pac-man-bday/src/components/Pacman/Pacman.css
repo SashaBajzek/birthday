@@ -1,0 +1,30 @@
+.Pacman {
+  height: 20px;
+  position: absolute;
+  width: 20px;
+  z-index: 2;
+}
+
+.Pacman--open {
+  background: center / contain no-repeat url(../../images/pacman/Pac-Man.svg);
+}
+
+.Pacman--closed {
+  background: center / contain no-repeat url(../../images/pacman/Pac-Man__Closed.svg);
+}
+
+.Pacman--left {
+  transform: rotate(0deg);
+}
+
+.Pacman--right {
+  transform: rotate(180deg);
+}
+
+.Pacman--up {
+  transform: rotate(90deg);
+}
+
+.Pacman--down {
+  transform: rotate(-90deg);
+}

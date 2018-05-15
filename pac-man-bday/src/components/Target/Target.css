@@ -1,0 +1,10 @@
+.Target {
+  background: teal;
+  height: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 10px teal;
+  left: 5px;
+  position: absolute;
+  width: 10px;
+  z-index: 1;
+}

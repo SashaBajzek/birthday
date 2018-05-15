@@ -1,0 +1,39 @@
+.Dot {
+  margin: auto;
+  z-index: -1;
+}
+
+.dot__large {
+  background: center / contain no-repeat url(../../images/dots/dotLarge.svg);
+  height: 16px;
+  width: 16px;
+}
+
+.dot__large--flashing {
+  animation: flash .5s infinite linear;
+}
+
+@keyframes flash {
+  0% {
+    background: center / contain no-repeat url(../../images/dots/dotLarge.svg);
+  }
+  50% {
+    background: black;
+    background-image: none;
+  }
+  100% {
+    background: center / contain no-repeat url(../../images/dots/dotLarge.svg);
+  }
+}
+
+.dot__small {
+  background: center / contain no-repeat url(../../images/dots/dotSmall.svg);
+  height: 4px;
+  width: 4px;
+}
+
+.eaten {
+  animation: none;
+  background: black;
+  background-image: none;
+}

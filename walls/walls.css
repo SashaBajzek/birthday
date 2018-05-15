@@ -1,8 +1,0 @@
-.walls {
-  border: 1px solid rgb(27, 34, 164);
-  border-radius: 10px;
-  height: 100px;
-  position: absolute;
-  width: 100px;
-  z-index: -1;
-}
