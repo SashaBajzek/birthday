@@ -1,4 +1,3 @@
-// import update from 'immutability-helper'
 import * as React from 'react';
 
 import GameboardContainer from '../Gameboard/GameboardContainer';
