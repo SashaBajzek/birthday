@@ -25,34 +25,33 @@ interface IProps {
   onMovePacmanDown: any,
   onMovePacmanLeft: any,
   onMovePacmanRight: any,
-  onMovePacmanUp: any
+  onMovePacmanUp: any,
+  pacmanX: number,
+  pacmanY: number,
+  onSetTargetKeyboard: any,
+  targetX: number,
+  targetY: number
 }
 
 class App extends React.Component<IProps, any> {
-  // private timerID: any;
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      move: 0,
-      target: {
-        x: 3,
-        y: 3
-      }
-    }
-  }
+  private timerID: any;
 
   public handleKeyDown (e: any) {
     switch( e.keyCode ) {
       case 40:
+        this.props.onSetTargetKeyboard("down");
         this.props.onMovePacmanDown();
         break;
       case 37:
+        this.props.onSetTargetKeyboard("left");
         this.props.onMovePacmanLeft();
         break;
       case 39:
+        this.props.onSetTargetKeyboard("right");
         this.props.onMovePacmanRight();
         break;
       case 38:
+        this.props.onSetTargetKeyboard("up");
         this.props.onMovePacmanUp();
         break;
       default: 
@@ -62,37 +61,41 @@ class App extends React.Component<IProps, any> {
 
   public componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
+
+    this.timerID = setInterval(
+      () => this.pacmanMove(),
+      300
+    );
   }
 
   public componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyDown.bind(this));
+
+    clearInterval(this.timerID);
   }
 
   public pacmanMove() {
-    // if(this.state.pacmanState.x < this.state.target.x) {
-    //   update(this.state, {
-    //     pacmanState: {
-    //       mouthOpen: {$set: false},
-    //       x: {$set: 1}
-    //     }
-    //   })
-    // }
+    const { 
+      onMovePacmanDown,
+      onMovePacmanLeft,
+      onMovePacmanRight,
+      onMovePacmanUp,
+      pacmanX, 
+      pacmanY, 
+      targetX, 
+      targetY } = this.props;
 
-    this.setState({
-      move: this.state.move + 1
-    });
+    if(pacmanX < targetX) {
+      onMovePacmanRight()
+    } else if (pacmanX > targetX) {
+      onMovePacmanLeft()
+    } else if (pacmanY > targetY) {
+      onMovePacmanUp()
+    } else if (pacmanY < targetY) {
+      onMovePacmanDown()
+    }
   }
 
-  // public componentDidMount() {
-  //   this.timerID = setInterval(
-  //     () => this.pacmanMove(),
-  //     1000
-  //   );
-  // }
-
-  // public componentWillUnmount() {
-  //   clearInterval(this.timerID);
-  // }
 
   public render() {
     const birthday = {

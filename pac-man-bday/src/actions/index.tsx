@@ -22,7 +22,12 @@ export interface ISetTarget {
   type: constants.SET_TARGET
 }
 
-export type MovePacmanAction = IMovePacmanLeft | IMovePacmanRight | IMovePacmanUp | IMovePacmanDown | ISetTarget;
+export interface ISetTargetKeyboard {
+  direction: string,
+  type: constants.SET_TARGET_KEYBOARD
+}
+
+export type MovePacmanAction = IMovePacmanLeft | IMovePacmanRight | IMovePacmanUp | IMovePacmanDown | ISetTarget | ISetTargetKeyboard;
 
 export function movePacmanLeft(): IMovePacmanLeft {
   return {
@@ -53,5 +58,12 @@ export function setTarget(newX: number, newY: number): ISetTarget {
     newX,
     newY,
     type: constants.SET_TARGET
+  }
+}
+
+export function setTargetKeyboard(direction: string): ISetTargetKeyboard {
+  return {
+    direction,
+    type: constants.SET_TARGET_KEYBOARD
   }
 }

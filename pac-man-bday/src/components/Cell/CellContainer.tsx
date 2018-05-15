@@ -3,10 +3,11 @@ import * as actions from '../../actions/';
 import { IStoreState } from '../../types/index';
 import Cell from './Cell';
 
-export function mapStateToProps({ pacmanX, pacmanY, targetX, targetY }: IStoreState) {
+export function mapStateToProps({ pacmanX, pacmanY, targetVisible, targetX, targetY }: IStoreState) {
   return {
     pacmanX,
     pacmanY,
+    targetVisible,
     targetX,
     targetY
   }

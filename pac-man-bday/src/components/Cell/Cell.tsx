@@ -14,6 +14,7 @@ interface IProps {
   onSetTarget: any,
   pacmanX: number,
   pacmanY: number,
+  targetVisible: boolean,
   targetX: number,
   targetY: number,
   traversable: boolean
@@ -70,17 +71,19 @@ class Cell extends React.Component<IProps, any> {
     return wallClasses;
   };
 
-  public handleClick = () => (
-    this.props.onSetTarget(this.props.cellX, this.props.cellY)
-  )
+  public handleClick = () => {
+    if (this.props.traversable) {
+      return this.props.onSetTarget(this.props.cellX, this.props.cellY);
+    }
+  }
 
   public render() {
-    const { cellX, cellY, dot, pacmanX, pacmanY, targetX, targetY } = this.props;
+    const { cellX, cellY, dot, pacmanX, pacmanY, targetVisible, targetX, targetY } = this.props;
     return (
       <div className={`Cell ${this.getClasses()}`} onClick={this.handleClick}>
         <Dot dotSize={dot} />
         { cellX === pacmanX && cellY === pacmanY ? <PacmanContainer /> : "" }
-        { cellX === targetX && cellY === targetY ? <Target /> : "" }
+        { cellX === targetX && cellY === targetY && targetVisible ? <Target /> : "" }
       </div>
     );
   }

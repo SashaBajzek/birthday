@@ -1,4 +1,4 @@
-import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP, SET_TARGET } from '../constants/index';
+import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP, SET_TARGET, SET_TARGET_KEYBOARD } from '../constants/index';
 import { IStoreState } from '../types/index';
 
 import { MovePacmanAction } from '../actions';
@@ -154,8 +154,55 @@ function moveUp(state: IStoreState) {
 
 function setTarget(state: IStoreState, newX: number, newY: number) {
   return update(state, {
+    targetVisible: {$set: true}, // only want to show target when clicking targets, not when keyboarding
     targetX: {$set: newX},
     targetY: {$set: newY}
+  })
+}
+
+function setTargetKeyboard(state: IStoreState, direction: string) {
+  const currentCell = getCurrentCell(state);
+  let newPacmanX: number = state.pacmanX;
+  let newPacmanY: number = state.pacmanY;
+
+  if(direction === "down"){
+    if (currentCell.borders[2] === 0) {
+      if(state.pacmanY + 1 === state.gameboardColumns) {
+        newPacmanY = 0;
+      } else {
+        newPacmanY += 1;
+      }
+    }
+  } else if (direction === "left"){
+    if (currentCell.borders[3] === 0) {
+      if(state.pacmanX - 1 < 0) {
+        newPacmanX = state.gameboardColumns - 1;
+      } else {
+        newPacmanX -= 1;
+      }
+    }
+  } else if (direction === "right"){
+    if (currentCell.borders[1] === 0) {
+      if(state.pacmanX + 1 === state.gameboardColumns) {
+        newPacmanX = 0;
+      } else {
+        newPacmanX += 1;
+      }
+    }
+  } else if (direction === "up"){
+    if (currentCell.borders[0] === 0) {
+      if(state.pacmanY - 1 < 0) {
+        newPacmanY = state.gameboardColumns - 1;
+      } else {
+        newPacmanY -= 1;
+      }
+    }
+  }
+
+  return update(state, {
+    targetVisible: {$set: false}, // only want to show target when clicking targets, not when keyboarding
+    targetX: {$set: newPacmanX},
+    targetY: {$set: newPacmanY}
   })
 }
 
@@ -171,6 +218,8 @@ export function pacman(state: IStoreState, action: MovePacmanAction): IStoreStat
       return moveUp(state);
     case SET_TARGET:
       return setTarget(state, action.newX, action.newY);
+    case SET_TARGET_KEYBOARD:
+      return setTargetKeyboard(state, action.direction);
   }
   return state;
 }

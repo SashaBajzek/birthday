@@ -3,10 +3,14 @@ import * as actions from '../../actions/';
 import { IStoreState } from '../../types/index';
 import App from './App';
 
-export function mapStateToProps({ pacmanDirection, pacmanMouth }: IStoreState) {
+export function mapStateToProps({ pacmanDirection, pacmanMouth, pacmanX, pacmanY, targetX, targetY }: IStoreState) {
   return {
     pacmanDirection,
-    pacmanMouth
+    pacmanMouth,
+    pacmanX,
+    pacmanY,
+    targetX,
+    targetY
   }
 }
 
@@ -15,7 +19,8 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.MovePacmanAction>)
     onMovePacmanDown: () => dispatch(actions.movePacmanDown()),
     onMovePacmanLeft: () => dispatch(actions.movePacmanLeft()),
     onMovePacmanRight: () => dispatch(actions.movePacmanRight()),
-    onMovePacmanUp: () => dispatch(actions.movePacmanUp())
+    onMovePacmanUp: () => dispatch(actions.movePacmanUp()),
+    onSetTargetKeyboard: (direction: string) => dispatch(actions.setTargetKeyboard(direction))
   }
 }
 
