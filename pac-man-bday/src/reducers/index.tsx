@@ -46,6 +46,7 @@ function getItemValue(cell: any) {
 
 function moveDown(state: IStoreState) {
   const currentCell = getCurrentCell(state);
+
   if (currentCell.borders[2] === 0) {
     let newPacmanY: number = state.pacmanY;
     if(state.pacmanY + 1 === state.gameboardColumns) {
@@ -62,13 +63,37 @@ function moveDown(state: IStoreState) {
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanY: {$set: newPacmanY},
       pacmanYPrevious: {$set: state.pacmanY},
-      score: {$set: state.score +itemValue}
+      score: {$set: state.score +itemValue},
+      stalled: {$apply: (stalled: string) => {
+        if(stalled === "none") {
+          return "none";
+        } else if(stalled === "down") {
+          // if moving down, down stall is over
+          return "none";
+        } else {
+          // if stall is in another direction, keep that stall
+          return stalled;
+        }
+      }}
     })
   }
   else {
-    return {
-      ...state
-    }
+    // if can't move down due to wall, set stall to "down"
+    if (currentCell.borders[2] === 1) {
+      return update(state, {
+        stalled: {$set: "down"}
+      })
+    } else if (state.targetX > state.pacmanX) {
+      // if there is no wall to the down, then it is really stalled "left" or "right"
+      return update(state, {
+        stalled: {$set: "right"}
+      })
+    } else {
+      // if there is no wall to the down, then it is really stalled "left" or "right"
+      return update(state, {
+        stalled: {$set: "left"}
+      })
+    } 
   }
 }
 
@@ -90,13 +115,38 @@ function moveLeft(state: IStoreState) {
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanX: {$set: newPacmanX},
       pacmanXPrevious: {$set: state.pacmanX},
-      score: {$set: state.score +itemValue}
+      score: {$set: state.score +itemValue},
+      stalled: {$apply: (stalled: string) => {
+        if(stalled === "none") {
+          return "none";
+        } else if(stalled === "left") {
+          // if moving left, left stall is over
+          return "none";
+        } else {
+          // if stall is in another direction, keep that stall
+          console.log("moveleft reducer, original stalled", stalled);
+          return stalled;
+        }
+      }}
     })
   }
   else {
-    return {
-      ...state
-    }
+    // if can't move left due to wall, set stall to "left"
+    if (currentCell.borders[3] === 1) {
+      return update(state, {
+        stalled: {$set: "left"}
+      })
+    } else if(state.targetY > state.pacmanY) {
+      // if there is no wall to the left, then it is really stalled "up" or "down"
+      return update(state, {
+        stalled: {$set: "down"}
+      })
+    } else {
+      // if there is no wall to the left, then it is really stalled "up" or "down"
+      return update(state, {
+        stalled: {$set: "up"}
+      })
+    } 
   }
 }
 
@@ -118,13 +168,38 @@ function moveRight(state: IStoreState) {
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanX: {$set: newPacmanX},
       pacmanXPrevious: {$set: state.pacmanX},
-      score: {$set: state.score +itemValue}
+      score: {$set: state.score +itemValue},
+      stalled: {$apply: (stalled: string) => {
+        if(stalled === "none") {
+          return "none";
+        } else if(stalled === "right") {
+          // if moving right, right stall is over
+          return "none";
+        } else {
+          // if stall is in another direction, keep that stall
+          console.log("moveright reducer, original stalled", stalled);
+          return stalled;
+        }
+      }}
     })
   }
   else {
-    return {
-      ...state
-    }
+    // if can't move right due to wall, set stall to "right"
+    if (currentCell.borders[1] === 1) {
+      return update(state, {
+        stalled: {$set: "right"}
+      })
+    } else if(state.targetY > state.pacmanY) {
+      // if there is no wall to the right, then it is really stalled "down" or "up"
+      return update(state, {
+        stalled: {$set: "up"}
+      })
+    } else {
+      // if there is no wall to the right, then it is really stalled "down" or "up"
+      return update(state, {
+        stalled: {$set: "down"}
+      })
+    } 
   }
 }
 
@@ -146,18 +221,44 @@ function moveUp(state: IStoreState) {
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanY: {$set: newPacmanY},
       pacmanYPrevious: {$set: state.pacmanY},
-      score: {$set: state.score +itemValue}
+      score: {$set: state.score +itemValue},
+      stalled: {$apply: (stalled: string) => {
+        if(stalled === "none") {
+          return "none";
+        } else if(stalled === "up") {
+          // if moving up, up stall is over
+          return "none";
+        } else {
+          // if stall is in another direction, keep that stall
+          console.log("moveup reducer, original stalled", stalled);
+          return stalled;
+        }
+      }}
     })
   }
   else {
-    return {
-      ...state
-    }
+    // if can't move up due to wall, set stall to "up"
+    if (currentCell.borders[0] === 1) {
+      return update(state, {
+        stalled: {$set: "up"}
+      })
+    } else if(state.targetX > state.pacmanX) {
+      // if there is no wall to the down, then it is really stalled "left" or "right"
+      return update(state, {
+        stalled: {$set: "right"}
+      })
+    } else {
+      // if there is no wall to the down, then it is really stalled "left" or "right"
+      return update(state, {
+        stalled: {$set: "left"}
+      })
+    } 
   }
 }
 
 function setTarget(state: IStoreState, newX: number, newY: number) {
   return update(state, {
+    stalled: {$set: "none"}, // if choosing new target, clear the stall
     targetVisible: {$set: true}, // only want to show target when clicking targets, not when keyboarding
     targetX: {$set: newX},
     targetY: {$set: newY}
@@ -204,6 +305,7 @@ function setTargetKeyboard(state: IStoreState, direction: string) {
   }
 
   return update(state, {
+    stalled: {$set: "none"}, // when switching to keyboard, stalled no longer applies
     targetVisible: {$set: false}, // only want to show target when clicking targets, not when keyboarding
     targetX: {$set: newPacmanX},
     targetY: {$set: newPacmanY}

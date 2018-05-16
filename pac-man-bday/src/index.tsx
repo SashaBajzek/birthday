@@ -24,7 +24,9 @@ const store = createStore<IStoreState, MovePacmanAction, any, any>(pacman, {
   pacmanY: 0,
   pacmanYPrevious: -1,
   score: 0,
-  stalled: false,
+  stalled: "none",
+  stalledTargetX: 0,
+  stalledTargetY: 0,
   targetVisible: false,
   targetX: 0,
   targetY: 0
