@@ -68,8 +68,12 @@ function moveDown(state: IStoreState) {
         if(stalled === "none") {
           return "none";
         } else if(stalled === "down") {
-          // if moving down, down stall is over
-          return "none";
+          // if Y direction matches target, down stall is over
+          if(newPacmanY === state.targetY) {
+            return "none";
+          } else {
+            return stalled;
+          }
         } else {
           // if stall is in another direction, keep that stall
           return stalled;
@@ -120,8 +124,12 @@ function moveLeft(state: IStoreState) {
         if(stalled === "none") {
           return "none";
         } else if(stalled === "left") {
-          // if moving left, left stall is over
-          return "none";
+          // if X direction matches target, down stall is over
+          if(newPacmanX === state.targetX) {
+            return "none";
+          } else {
+            return stalled;
+          }
         } else {
           // if stall is in another direction, keep that stall
           console.log("moveleft reducer, original stalled", stalled);
@@ -173,8 +181,12 @@ function moveRight(state: IStoreState) {
         if(stalled === "none") {
           return "none";
         } else if(stalled === "right") {
-          // if moving right, right stall is over
-          return "none";
+          // if X direction matches target, right stall is over
+          if(newPacmanX === state.targetX) {
+            return "none";
+          } else {
+            return stalled;
+          }
         } else {
           // if stall is in another direction, keep that stall
           console.log("moveright reducer, original stalled", stalled);
@@ -226,8 +238,12 @@ function moveUp(state: IStoreState) {
         if(stalled === "none") {
           return "none";
         } else if(stalled === "up") {
-          // if moving up, up stall is over
-          return "none";
+          // if Y direction matches target, down stall is over
+          if(newPacmanY === state.targetY) {
+            return "none";
+          } else {
+            return stalled;
+          }
         } else {
           // if stall is in another direction, keep that stall
           console.log("moveup reducer, original stalled", stalled);
@@ -239,16 +255,21 @@ function moveUp(state: IStoreState) {
   else {
     // if can't move up due to wall, set stall to "up"
     if (currentCell.borders[0] === 1) {
+
+      // see if there is also a stall in a second direction
+
+
+
       return update(state, {
         stalled: {$set: "up"}
       })
     } else if(state.targetX > state.pacmanX) {
-      // if there is no wall to the down, then it is really stalled "left" or "right"
+      // if there is no wall up, then it is really stalled "left" or "right"
       return update(state, {
         stalled: {$set: "right"}
       })
     } else {
-      // if there is no wall to the down, then it is really stalled "left" or "right"
+      // if there is no wall up, then it is really stalled "left" or "right"
       return update(state, {
         stalled: {$set: "left"}
       })
