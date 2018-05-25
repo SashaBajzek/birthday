@@ -255,11 +255,6 @@ function moveUp(state: IStoreState) {
   else {
     // if can't move up due to wall, set stall to "up"
     if (currentCell.borders[0] === 1) {
-
-      // see if there is also a stall in a second direction
-
-
-
       return update(state, {
         stalled: {$set: "up"}
       })

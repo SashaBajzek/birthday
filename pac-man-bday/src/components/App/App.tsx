@@ -172,34 +172,73 @@ class App extends React.Component<IProps, any> {
         // At junction, final move right to get unstalled
         onMovePacmanRight();
       }
-    } else if(pacmanX < targetX && !currentCellBorders[1] ) {
-      // if target is to the right
-      // there is no wall to the right
-      onMovePacmanRight();
-    } else if (pacmanX > targetX && !currentCellBorders[3] ) {
-      // if target is to the left
-      // there is no wall to the left
-      onMovePacmanLeft();
-    } else if (pacmanY > targetY && !currentCellBorders[0] ) {
-      // if target is up
-      // there is no wall up
-      onMovePacmanUp();
-    } else if (pacmanY < targetY && !currentCellBorders[2] ) {
-      // if target is down
-      // there is no wall down
-      onMovePacmanDown();
-    } else if(pacmanX < targetX ) {
-      // if target is to the right
-      onMovePacmanRight();
-    } else if (pacmanX > targetX ) {
-      // if target is to the left
-      onMovePacmanLeft();
-    } else if (pacmanY > targetY ) {
-      // if target is up
-      onMovePacmanUp();
-    } else if (pacmanY < targetY ) {
-      // if target is down
-      onMovePacmanDown();
+    } else if(diffXAbs > diffYAbs) {
+
+      // If Pac-Man is furthest away from the target in the X, direction, 
+      // Favor fixing the X direction first
+
+      if(pacmanX < targetX && !currentCellBorders[1] ) {
+        // if target is to the right
+        // there is no wall to the right
+        onMovePacmanRight();
+      } else if (pacmanX > targetX && !currentCellBorders[3] ) {
+        // if target is to the left
+        // there is no wall to the left
+        onMovePacmanLeft();
+      } else if (pacmanY > targetY && !currentCellBorders[0] ) {
+        // if target is up
+        // there is no wall up
+        onMovePacmanUp();
+      } else if (pacmanY < targetY && !currentCellBorders[2] ) {
+        // if target is down
+        // there is no wall down
+        onMovePacmanDown();
+      } else if(pacmanX < targetX ) {
+        // if target is to the right
+        onMovePacmanRight();
+      } else if (pacmanX > targetX ) {
+        // if target is to the left
+        onMovePacmanLeft();
+      } else if (pacmanY > targetY ) {
+        // if target is up
+        onMovePacmanUp();
+      } else if (pacmanY < targetY ) {
+        // if target is down
+        onMovePacmanDown();
+      }
+    } else {
+      // Else if Pac-Man is furthest from target in the Y direction,
+      // Favor fixing the Y direction first
+
+      if (pacmanY > targetY && !currentCellBorders[0] ) {
+        // if target is up
+        // there is no wall up
+        onMovePacmanUp();
+      } else if (pacmanY < targetY && !currentCellBorders[2] ) {
+        // if target is down
+        // there is no wall down
+        onMovePacmanDown();
+      } else if(pacmanX < targetX && !currentCellBorders[1] ) {
+        // if target is to the right
+        // there is no wall to the right
+        onMovePacmanRight();
+      } else if (pacmanX > targetX && !currentCellBorders[3] ) {
+        // if target is to the left
+        // there is no wall to the left
+        onMovePacmanLeft();
+      }  else if (pacmanY > targetY ) {
+        // if target is up
+        onMovePacmanUp();
+      } else if (pacmanY < targetY ) {
+        // if target is down
+        onMovePacmanDown();
+      } else if(pacmanX < targetX ) {
+        // if target is to the right
+        onMovePacmanRight();
+      } else if (pacmanX > targetX ) {
+        // if target is to the left
+        onMovePacmanLeft();
+      } 
     }
   }
 
