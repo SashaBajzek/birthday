@@ -6,17 +6,20 @@ import './Cell.css';
 
 interface IProps {
   borders: number[],
-  cellX: number,
-  cellY: number,
+  // cellX: number,
+  // cellY: number,
+  cell: any,
   dot: string,
   key: string,
   item: string,
   onSetTarget: any,
-  pacmanX: number,
-  pacmanY: number,
+  // pacmanX: number,
+  // pacmanY: number,
+  pacmanPresent: any,
+  targetPresent: any,
   targetVisible: boolean,
-  targetX: number,
-  targetY: number,
+  // targetX: number,
+  // targetY: number,
   traversable: boolean
 }
 
@@ -24,7 +27,7 @@ class Cell extends React.Component<IProps, any> {
 
   public getClasses = () => {
     let wallClasses: string = '';
-    const borders = this.props.borders;
+    const borders = this.props.cell.borders;
 
     // north
     if(borders[0] === 1) {
@@ -72,18 +75,18 @@ class Cell extends React.Component<IProps, any> {
   };
 
   public handleClick = () => {
-    if (this.props.traversable) {
-      return this.props.onSetTarget(this.props.cellX, this.props.cellY);
+    if (this.props.cell.traversable) {
+      return this.props.onSetTarget(this.props.cell.x, this.props.cell.y);
     }
   }
 
   public render() {
-    const { cellX, cellY, dot, pacmanX, pacmanY, targetVisible, targetX, targetY } = this.props;
+    const { cell, pacmanPresent, targetPresent, targetVisible } = this.props;
     return (
       <div className={`Cell ${this.getClasses()}`} onClick={this.handleClick}>
-        <Dot dotSize={dot} />
-        { cellX === pacmanX && cellY === pacmanY ? <PacmanContainer /> : "" }
-        { cellX === targetX && cellY === targetY && targetVisible ? <Target /> : "" }
+        <Dot dotSize={cell.dot} />
+        { pacmanPresent ? <PacmanContainer /> : "" }
+        { targetPresent && targetVisible ? <Target /> : "" }
       </div>
     );
   }
