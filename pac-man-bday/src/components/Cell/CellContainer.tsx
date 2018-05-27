@@ -40,11 +40,3 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.MovePacmanAction>)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cell);
-
-
-
-
-/*
-borders = {cell.borders} dot={cell.dot} item={cell.item} traversable={cell.traversable} cellX={cell.x} cellY={cell.y}
-
-*/

@@ -40,7 +40,7 @@ const gameboardCells = [
     dot: "small",
     id: "r0c4",
     item: "none",
-    traversable: false,
+    traversable: true,
     x: 4,
     y: 0
   },
@@ -49,7 +49,7 @@ const gameboardCells = [
     dot: "small",
     id: "r0c5",
     item: "none",
-    traversable: false,
+    traversable: true,
     x: 5,
     y: 0
   },
@@ -3020,7 +3020,7 @@ const gameboardCells = [
     dot: "small",
     id: "r10c4",
     item: "none",
-    traversable: false,
+    traversable: true,
     x: 4,
     y: 10
   },
@@ -3029,7 +3029,7 @@ const gameboardCells = [
     dot: "small",
     id: "r10c5",
     item: "none",
-    traversable: false,
+    traversable: true,
     x: 5,
     y: 10
   },
@@ -5404,7 +5404,7 @@ const gameboardCells = [
     dot: "small",
     id: "r18c4",
     item: "none",
-    traversable: false,
+    traversable: true,
     x: 4,
     y: 18
   },
@@ -5413,7 +5413,7 @@ const gameboardCells = [
     dot: "small",
     id: "r18c5",
     item: "none",
-    traversable: false,
+    traversable: true,
     x: 5,
     y: 18
   },
