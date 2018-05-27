@@ -15,8 +15,8 @@ import gameboardCells from './gameboardCells';
 
 const store = createStore<IStoreState, MovePacmanAction, any, any>(pacman, {
   cells: gameboardCells,
-  gameboardColumns: 10,
-  gameboardRows: 6,
+  gameboardColumns: 33,
+  gameboardRows: 18,
   pacmanDirection: 'right',
   pacmanMouth: true,
   pacmanX: 0,

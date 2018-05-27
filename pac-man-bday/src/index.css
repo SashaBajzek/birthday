@@ -9,14 +9,14 @@
 
 html {
   background: black;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 body {
   box-sizing: border-box;
   height: 100vh;
   margin: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 0;
   position: relative;
 }

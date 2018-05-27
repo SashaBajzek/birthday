@@ -2,7 +2,7 @@
   color: white;
   display: flex;
   flex-wrap: wrap;
-  height: 180px;
+  height: calc(19 * 30px);
   margin: 0 auto;
-  width: 300px;
+  width: calc(33 * 30px);
 }

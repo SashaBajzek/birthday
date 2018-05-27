@@ -29,6 +29,7 @@ function getTargetJunction(cells: any, pacmanX: number, pacmanY: number, stalled
 
     // Find nearest junction with down path
     // TODO:  have it take into account doors
+    // TODO:  have it choose based on nearest junction & junction closest to target
     const distancesFromCurrentLocation = rowCellsWithDownPath.map((cell: any) => {
       return Math.abs(cell.x - pacmanX);
     });
