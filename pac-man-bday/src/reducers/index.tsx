@@ -36,9 +36,9 @@ function getCellId(state: IStoreState, x: number, y: number) {
 
 function getItemValue(cell: any) {
   if(cell.dot === "large") {
-    return 10;
+    return 50;
   } else if(cell.dot === "small") {
-    return 1;
+    return 10;
   } else {
     return 0;
   }
