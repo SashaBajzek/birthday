@@ -1,7 +1,7 @@
 .Pacman {
-  height: 20px;
+  height: 10px;
   position: absolute;
-  width: 20px;
+  width: 10px;
   z-index: 2;
 }
 
@@ -27,4 +27,11 @@
 
 .Pacman--down {
   transform: rotate(-90deg);
+}
+
+@media (min-width: 340px) {
+  .Pacman {
+    height: 20px;
+    width: 20px;
+  }
 }

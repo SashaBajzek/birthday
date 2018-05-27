@@ -5,8 +5,8 @@
 
 .dot__large {
   background: center / contain no-repeat url(../../images/dots/dotLarge.svg);
-  height: 16px;
-  width: 16px;
+  height: 8px;
+  width: 8px;
 }
 
 .dot__large--flashing {
@@ -28,12 +28,24 @@
 
 .dot__small {
   background: center / contain no-repeat url(../../images/dots/dotSmall.svg);
-  height: 4px;
-  width: 4px;
+  height: 2px;
+  width: 2px;
 }
 
 .eaten {
   animation: none;
   background: black;
   background-image: none;
+}
+
+@media (min-width: 340px) {
+  .dot__large {
+    height: 16px;
+    width: 16px;
+  }
+
+  .dot__small {
+    height: 4px;
+    width: 4px;
+  }
 }
