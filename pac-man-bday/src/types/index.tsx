@@ -1,3 +1,9 @@
+export interface IGrid {
+  width: number,
+  height: number,
+  nodes: any[]
+}
+
 export interface IStoreState {
   gameboardColumns: number,
   gameboardRows: number,
@@ -14,5 +20,6 @@ export interface IStoreState {
   targetVisible: boolean,
   targetX: number,
   targetY: number,
-  cells: any[]
+  cells: any[],
+  grid: IGrid
 }
