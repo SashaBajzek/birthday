@@ -48,19 +48,19 @@ class App extends React.Component<IProps, any> {
     switch( e.keyCode ) {
       case 40:
         this.props.onSetTargetKeyboard("down");
-        this.pacmanMove();
+        this.props.onMovePacmanDown();
         break;
       case 37:
         this.props.onSetTargetKeyboard("left");
-        this.pacmanMove();
+        this.props.onMovePacmanLeft();
         break;
       case 39:
         this.props.onSetTargetKeyboard("right");
-        this.pacmanMove();
+        this.props.onMovePacmanRight();
         break;
       case 38:
         this.props.onSetTargetKeyboard("up");
-        this.pacmanMove();
+        this.props.onMovePacmanUp();
         break;
       default: 
         break;
@@ -99,6 +99,8 @@ class App extends React.Component<IProps, any> {
 
     const diffX = targetX - pacmanX;
     const diffY = targetY - pacmanY;
+
+    // TODO, need to incorporate doors in pathfinding
 
     if (diffX === 0 && diffY === 0) {
       // if pacman at target, do nothing
