@@ -14,12 +14,8 @@ export interface IStoreState {
   pacmanY: number,
   pacmanYPrevious: number,
   score: number,
-  stalled: string,
-  stalledTargetX: number,
-  stalledTargetY: number,
   targetVisible: boolean,
   targetX: number,
   targetY: number,
-  cells: any[],
-  grid: IGrid
+  cells: any[]
 }

@@ -12,15 +12,11 @@ import { pacman } from './reducers/index';
 import { IStoreState } from './types/index';
 
 import gameboardCells from './gameboardCells';
-import gameGrid from './pathfindingGrid';
-
-console.log("gameGrid", gameGrid);
 
 const store = createStore<IStoreState, MovePacmanAction, any, any>(pacman, {
   cells: gameboardCells,
   gameboardColumns: 33,
   gameboardRows: 19,
-  grid: gameGrid,
   pacmanDirection: 'right',
   pacmanMouth: true,
   pacmanX: 0,
@@ -28,9 +24,6 @@ const store = createStore<IStoreState, MovePacmanAction, any, any>(pacman, {
   pacmanY: 0,
   pacmanYPrevious: -1,
   score: 0,
-  stalled: "none",
-  stalledTargetX: 0,
-  stalledTargetY: 0,
   targetVisible: false,
   targetX: 0,
   targetY: 0
