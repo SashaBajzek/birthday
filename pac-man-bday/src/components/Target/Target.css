@@ -1,10 +1,20 @@
 .Target {
   background: teal;
-  height: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px 10px teal;
-  left: 5px;
+  height: 5px;
+  border-radius: 2.5px;
+  box-shadow: 0 0 5px 5px teal;
+  left: 2.5px;
   position: absolute;
-  width: 10px;
+  width: 5px;
   z-index: 1;
+}
+
+@media (min-width: 340px) {
+  .Target {
+    height: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 10px teal;
+    left: 5px;
+    width: 10px;
+  }
 }

@@ -1,5 +1,7 @@
+import * as PF from 'pathfinding';
 import * as React from 'react';
 
+import gameGrid from '../../pathfindingGrid';
 import GameboardContainer from '../Gameboard/GameboardContainer';
 import ScoreboardContainer from '../Scoreboard/ScoreboardContainer';
 import './App.css';
@@ -35,7 +37,6 @@ interface IProps {
   onSetTargetKeyboard: any,
   rowEndDoor: boolean,
   rowStartDoor: boolean,
-  stalled: boolean,
   targetX: number,
   targetY: number
 }
@@ -47,19 +48,19 @@ class App extends React.Component<IProps, any> {
     switch( e.keyCode ) {
       case 40:
         this.props.onSetTargetKeyboard("down");
-        this.pacmanMove();
+        this.props.onMovePacmanDown();
         break;
       case 37:
         this.props.onSetTargetKeyboard("left");
-        this.pacmanMove();
+        this.props.onMovePacmanLeft();
         break;
       case 39:
         this.props.onSetTargetKeyboard("right");
-        this.pacmanMove();
+        this.props.onMovePacmanRight();
         break;
       case 38:
         this.props.onSetTargetKeyboard("up");
-        this.pacmanMove();
+        this.props.onMovePacmanUp();
         break;
       default: 
         break;
@@ -83,52 +84,41 @@ class App extends React.Component<IProps, any> {
 
   public pacmanMove() {
     const { 
-      columnEndDoor,
-      columnStartDoor,
-      currentCellBorders,
-      gameboardColumns,
-      gameboardRows,
       onMovePacmanDown,
       onMovePacmanLeft,
       onMovePacmanRight,
       onMovePacmanUp,
       pacmanX, 
       pacmanY, 
-      rowEndDoor,
-      rowStartDoor,
       targetX, 
       targetY } = this.props;
 
+    const backupGrid = gameGrid.clone();
+    const finder = new PF.AStarFinder();
+    const nextMove = finder.findPath(pacmanX, pacmanY, targetX, targetY, backupGrid);
+
     const diffX = targetX - pacmanX;
     const diffY = targetY - pacmanY;
-    const diffXAbs = Math.abs(diffX);
-    const diffYAbs = Math.abs(diffY);
 
-    if (diffXAbs === 0 && diffYAbs === 0) {
+    // TODO, need to incorporate doors in pathfinding
+
+    if (diffX === 0 && diffY === 0) {
       // if pacman at target, do nothing
-    } else if(pacmanX < 2 && targetX === gameboardColumns - 1 && !currentCellBorders[3] && rowStartDoor ) {
-      // if pacman is near door, go through it
-      onMovePacmanLeft();
-    } else if (pacmanX > gameboardColumns - 3 && targetX === 0 && !currentCellBorders[1] && rowEndDoor ) {
-      // if pacman is near door, go through it
-      onMovePacmanRight();
-    } else if (pacmanY < 2 && targetY === gameboardRows - 1 && !currentCellBorders[0] && columnStartDoor ) {
-      // if pacman is near door, go through it
-      onMovePacmanUp();
-    } else if (pacmanY > gameboardRows - 3 && targetY === 0 && !currentCellBorders[2] && columnEndDoor ) {
-      // if pacman is near door, go through it
-      onMovePacmanDown();
-    } else if(pacmanX < targetX) {
-      onMovePacmanRight();
-    } else if (pacmanX > targetX) {
-      onMovePacmanLeft();
-    } else if (pacmanY > targetY) {
-      onMovePacmanUp();
-    } else if (pacmanY < targetY) {
-      onMovePacmanDown();
+    } else if (nextMove.length > 0) {
+      // Check if there is a nextMove
+      if(nextMove[1][0] < pacmanX) {
+        onMovePacmanLeft();
+      } else if(nextMove[1][0] > pacmanX) {
+        onMovePacmanRight();
+      } else if(nextMove[1][1] < pacmanY) {
+        onMovePacmanUp();
+      } else if(nextMove[1][1] > pacmanY) {
+        onMovePacmanDown();
+      }
+    } else {
+      // Do nothing
     }
   }
-
 
   public render() {
     const birthday = {

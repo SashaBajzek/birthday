@@ -15,6 +15,3 @@ export type SET_TARGET = typeof SET_TARGET;
 
 export const SET_TARGET_KEYBOARD = 'SET_TARGET_KEYBOARD';
 export type SET_TARGET_KEYBOARD = typeof SET_TARGET_KEYBOARD;
-
-export const SET_STALLED = 'SET_STALLED';
-export type SET_STALLED = typeof SET_STALLED;

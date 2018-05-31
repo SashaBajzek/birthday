@@ -2,7 +2,14 @@
   color: white;
   display: flex;
   flex-wrap: wrap;
-  height: 180px;
+  height: calc(19 * 15px);
   margin: 0 auto;
-  width: 300px;
+  width: calc(33 * 15px);
+}
+
+@media (min-width: 340px) {
+  .Gameboard {
+    height: calc(19 * 30px);
+    width: calc(33 * 30px);
+  }
 }

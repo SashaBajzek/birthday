@@ -1,4 +1,4 @@
-import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP, SET_STALLED, SET_TARGET, SET_TARGET_KEYBOARD } from '../constants/index';
+import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP, SET_TARGET, SET_TARGET_KEYBOARD } from '../constants/index';
 import { IStoreState } from '../types/index';
 
 import { MovePacmanAction } from '../actions';
@@ -36,9 +36,9 @@ function getCellId(state: IStoreState, x: number, y: number) {
 
 function getItemValue(cell: any) {
   if(cell.dot === "large") {
-    return 10;
+    return 50;
   } else if(cell.dot === "small") {
-    return 1;
+    return 10;
   } else {
     return 0;
   }
@@ -46,8 +46,7 @@ function getItemValue(cell: any) {
 
 function moveDown(state: IStoreState) {
   const currentCell = getCurrentCell(state);
-  if (currentCell.borders[2] === 0) {
-    let newPacmanY: number = state.pacmanY;
+  let newPacmanY: number = state.pacmanY;
     if(state.pacmanY + 1 === state.gameboardColumns) {
       newPacmanY = 0;
     } else {
@@ -55,104 +54,96 @@ function moveDown(state: IStoreState) {
     }
     const nextCellId = getCellId(state, state.pacmanX, newPacmanY);
     const nextCell = getCell(state, state.pacmanX, newPacmanY);
+
+  if (currentCell.borders[2] === 0 && nextCell.traversable) {
     const itemValue = getItemValue(nextCell);
     return update(state, {
       cells: {[nextCellId]: {dot: {$set: "none"}}},
       pacmanDirection: {$set: "down"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanY: {$set: newPacmanY},
-      pacmanYPrevious: {$set: state.pacmanY},
       score: {$set: state.score +itemValue}
     })
-  }
-  else {
-    return {
-      ...state
-    }
+  } else {
+    return state;
   }
 }
 
 function moveLeft(state: IStoreState) {
   const currentCell = getCurrentCell(state);
-  if (currentCell.borders[3] === 0) {
-    let newPacmanX: number = state.pacmanX;
-    if(state.pacmanX - 1 < 0) {
-      newPacmanX = state.gameboardColumns - 1;
-    } else {
-      newPacmanX -= 1;
-    }
-    const nextCellId = getCellId(state, newPacmanX, state.pacmanY);
-    const nextCell = getCell(state, newPacmanX, state.pacmanY);
+  let newPacmanX: number = state.pacmanX;
+  if(state.pacmanX - 1 < 0) {
+    newPacmanX = state.gameboardColumns - 1;
+  } else {
+    newPacmanX -= 1;
+  }
+  const nextCellId = getCellId(state, newPacmanX, state.pacmanY);
+  const nextCell = getCell(state, newPacmanX, state.pacmanY);
+
+  if (currentCell.borders[3] === 0 && nextCell.traversable) {
     const itemValue = getItemValue(nextCell);
     return update(state, {
       cells: {[nextCellId]: {dot: {$set: "none"}}},
       pacmanDirection: {$set: "left"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanX: {$set: newPacmanX},
-      pacmanXPrevious: {$set: state.pacmanX},
       score: {$set: state.score +itemValue}
     })
   }
   else {
-    return {
-      ...state
-    }
+    return state; 
   }
 }
 
 function moveRight(state: IStoreState) {
   const currentCell = getCurrentCell(state);
-  if (currentCell.borders[1] === 0) {
-    let newPacmanX: number = state.pacmanX;
-    if(state.pacmanX + 1 === state.gameboardColumns) {
-      newPacmanX = 0;
-    } else {
-      newPacmanX += 1;
-    }
-    const nextCellId = getCellId(state, newPacmanX, state.pacmanY);
-    const nextCell = getCell(state, newPacmanX, state.pacmanY);
+  let newPacmanX: number = state.pacmanX;
+  if(state.pacmanX + 1 === state.gameboardColumns) {
+    newPacmanX = 0;
+  } else {
+    newPacmanX += 1;
+  }
+  const nextCellId = getCellId(state, newPacmanX, state.pacmanY);
+  const nextCell = getCell(state, newPacmanX, state.pacmanY);
+
+  if (currentCell.borders[1] === 0 && nextCell.traversable) {
     const itemValue = getItemValue(nextCell);
     return update(state, {
       cells: {[nextCellId]: {dot: {$set: "none"}}},
       pacmanDirection: {$set: "right"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanX: {$set: newPacmanX},
-      pacmanXPrevious: {$set: state.pacmanX},
       score: {$set: state.score +itemValue}
     })
   }
   else {
-    return {
-      ...state
-    }
+    return state; 
   }
 }
 
 function moveUp(state: IStoreState) {
   const currentCell = getCurrentCell(state);
-  if (currentCell.borders[0] === 0) {
-    let newPacmanY: number = state.pacmanY;
-    if(state.pacmanY - 1 < 0) {
-      newPacmanY = state.gameboardColumns - 1;
-    } else {
-      newPacmanY -= 1;
-    }
-    const nextCellId = getCellId(state, state.pacmanX, newPacmanY);
-    const nextCell = getCell(state, state.pacmanX, newPacmanY);
+  let newPacmanY: number = state.pacmanY;
+  if(state.pacmanY - 1 < 0) {
+    newPacmanY = state.gameboardColumns - 1;
+  } else {
+    newPacmanY -= 1;
+  }
+  const nextCellId = getCellId(state, state.pacmanX, newPacmanY);
+  const nextCell = getCell(state, state.pacmanX, newPacmanY);
+
+  if (currentCell.borders[0] === 0 && nextCell.traversable) {
     const itemValue = getItemValue(nextCell);
     return update(state, {
       cells: {[nextCellId]: {dot: {$set: "none"}}},
       pacmanDirection: {$set: "up"}, 
       pacmanMouth: {$set: !state.pacmanMouth},
       pacmanY: {$set: newPacmanY},
-      pacmanYPrevious: {$set: state.pacmanY},
       score: {$set: state.score +itemValue}
     })
   }
   else {
-    return {
-      ...state
-    }
+    return state;
   }
 }
 
@@ -210,11 +201,6 @@ function setTargetKeyboard(state: IStoreState, direction: string) {
   })
 }
 
-function setStalled(state: IStoreState, stalled: boolean) {
-  return update(state, {
-    stalled: {$set: stalled}
-  })
-}
 
 export function pacman(state: IStoreState, action: MovePacmanAction): IStoreState {
   switch (action.type) {
@@ -230,8 +216,6 @@ export function pacman(state: IStoreState, action: MovePacmanAction): IStoreStat
       return setTarget(state, action.newX, action.newY);
     case SET_TARGET_KEYBOARD:
       return setTargetKeyboard(state, action.direction);
-    case SET_STALLED:
-      return setStalled(state, action.stalled);
   }
   return state;
 }
