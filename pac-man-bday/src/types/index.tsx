@@ -5,6 +5,10 @@ export interface IGrid {
 }
 
 export interface IStoreState {
+  doorLeft: any,
+  doorRight: any,
+  doorTargetX: number,
+  doorTargetY: number,
   gameboardColumns: number,
   gameboardRows: number,
   pacmanDirection: string,
@@ -17,5 +21,6 @@ export interface IStoreState {
   targetVisible: boolean,
   targetX: number,
   targetY: number,
+  travellingToDoor: boolean
   cells: any[]
 }

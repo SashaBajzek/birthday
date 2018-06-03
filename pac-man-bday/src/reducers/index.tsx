@@ -1,4 +1,4 @@
-import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP, SET_TARGET, SET_TARGET_KEYBOARD } from '../constants/index';
+import { MOVE_PACMAN_DOWN, MOVE_PACMAN_LEFT, MOVE_PACMAN_RIGHT, MOVE_PACMAN_UP, SET_DOOR_TARGET, SET_TARGET, SET_TARGET_KEYBOARD } from '../constants/index';
 import { IStoreState } from '../types/index';
 
 import { MovePacmanAction } from '../actions';
@@ -201,6 +201,14 @@ function setTargetKeyboard(state: IStoreState, direction: string) {
   })
 }
 
+function setDoorTarget(state: IStoreState, newX: number, newY: number, travellingToDoor: boolean) {
+  return update(state, {
+    doorTargetX: {$set: newX},
+    doorTargetY: {$set: newY},
+    travellingToDoor: {$set: true}
+  })
+}
+
 
 export function pacman(state: IStoreState, action: MovePacmanAction): IStoreState {
   switch (action.type) {
@@ -216,6 +224,8 @@ export function pacman(state: IStoreState, action: MovePacmanAction): IStoreStat
       return setTarget(state, action.newX, action.newY);
     case SET_TARGET_KEYBOARD:
       return setTargetKeyboard(state, action.direction);
+    case SET_DOOR_TARGET:
+      return setDoorTarget(state, action.newX, action.newY, action.travellingToDoor);
   }
   return state;
 }
