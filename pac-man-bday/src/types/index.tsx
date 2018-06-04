@@ -10,12 +10,10 @@ export interface IStoreState {
   pacmanDirection: string,
   pacmanMouth: boolean,
   pacmanX: number,
-  pacmanXPrevious: number,
   pacmanY: number,
-  pacmanYPrevious: number,
   score: number,
   targetVisible: boolean,
   targetX: number,
-  targetY: number,
+  targetY: number
   cells: any[]
 }

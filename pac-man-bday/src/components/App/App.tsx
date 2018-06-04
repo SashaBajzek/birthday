@@ -1,7 +1,7 @@
 import * as PF from 'pathfinding';
 import * as React from 'react';
 
-import gameGrid from '../../pathfindingGrid';
+import { gameGridInsideOut, gameGridOriginal } from '../../pathfindingGrid';
 import GameboardContainer from '../Gameboard/GameboardContainer';
 import ScoreboardContainer from '../Scoreboard/ScoreboardContainer';
 import './App.css';
@@ -23,9 +23,6 @@ function isTodayBirthday(birthday: IBirthday) {
 }
 
 interface IProps {
-  columnEndDoor: boolean,
-  columnStartDoor: boolean,
-  currentCellBorders: number[],
   gameboardColumns: number,
   gameboardRows: number,
   onMovePacmanDown: any,
@@ -35,8 +32,6 @@ interface IProps {
   pacmanX: number,
   pacmanY: number,
   onSetTargetKeyboard: any,
-  rowEndDoor: boolean,
-  rowStartDoor: boolean,
   targetX: number,
   targetY: number
 }
@@ -84,6 +79,7 @@ class App extends React.Component<IProps, any> {
 
   public pacmanMove() {
     const { 
+      gameboardColumns,
       onMovePacmanDown,
       onMovePacmanLeft,
       onMovePacmanRight,
@@ -93,22 +89,56 @@ class App extends React.Component<IProps, any> {
       targetX, 
       targetY } = this.props;
 
-    const backupGrid = gameGrid.clone();
-    const finder = new PF.AStarFinder();
-    const nextMove = finder.findPath(pacmanX, pacmanY, targetX, targetY, backupGrid);
+    // Build the path for the original pathfinding grid
+    const backupGrid1 = gameGridOriginal.clone();
+    const finder1 = new PF.AStarFinder();
+    const nextMove1 = finder1.findPath(pacmanX, pacmanY, targetX, targetY, backupGrid1);
+
+    // Make a second set of pacmanX and targetX location for the second pathfinding grid
+    // Since the first and second halfs of the grid have been rearranged
+    let pacmanXInsideOut: number;
+    if(pacmanX < Math.ceil(gameboardColumns / 2)) {
+      pacmanXInsideOut = pacmanX + Math.ceil(gameboardColumns / 2);
+    } else {
+      pacmanXInsideOut = pacmanX - Math.ceil(gameboardColumns / 2);
+    }
+
+    let targetXInsideOut: number;
+    if(targetX < Math.ceil(gameboardColumns / 2)) {
+      targetXInsideOut = targetX + Math.ceil(gameboardColumns / 2);
+    } else {
+      targetXInsideOut = targetX - Math.ceil(gameboardColumns / 2);
+    }
+
+    // Build the path for the second pathfinding grid made for going through the door
+    const backupGrid2 = gameGridInsideOut.clone();
+    const finder2 = new PF.AStarFinder();
+    const nextMove2 = finder2.findPath(pacmanXInsideOut, pacmanY, targetXInsideOut, targetY, backupGrid2);
+
+    let nextMove: any;
+    let nextPacman: any;
+
+    // Choose the shortest path between walking across the board or taking the door
+    if(nextMove1.length > nextMove2.length) {
+      // pacman goes through the door
+      nextMove = nextMove2;
+      nextPacman = pacmanXInsideOut;
+    } else {
+      // pacman walks across the board
+      nextMove = nextMove1;
+      nextPacman = pacmanX;
+    }
 
     const diffX = targetX - pacmanX;
     const diffY = targetY - pacmanY;
-
-    // TODO, need to incorporate doors in pathfinding
 
     if (diffX === 0 && diffY === 0) {
       // if pacman at target, do nothing
     } else if (nextMove.length > 0) {
       // Check if there is a nextMove
-      if(nextMove[1][0] < pacmanX) {
+      if(nextMove[1][0] < nextPacman) {
         onMovePacmanLeft();
-      } else if(nextMove[1][0] > pacmanX) {
+      } else if(nextMove[1][0] > nextPacman) {
         onMovePacmanRight();
       } else if(nextMove[1][1] < pacmanY) {
         onMovePacmanUp();
