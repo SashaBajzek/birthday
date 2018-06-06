@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 56 56" style="enable-background:new 0 0 56 56;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#00FFDE;}
+	.st1{fill:#DEDEDE;}
+	.st2{fill:#2121DE;}
+</style>
+<path class="st0" d="M52,24V12h-4.1V8H44V4h-8V0H20v3.9h-8.1v4H8v4H4v12H0V52h4v4h7.9v-3.9h4V48h3.9v4.1H24V56h8v-4.1h3.9V48H40v3.9
+	h3.9V56h8v-3.9h4V24H52z M24,32.1h-4.1v4H12v-4H8V20h3.8v-4H20v4h4V32.1z M47.9,32H44v4.1h-8V32h-4V20h4v-4h7.9v4h3.9L47.9,32
+	L47.9,32z"/>
+<polygon class="st1" points="24,20 24,32.1 19.9,32.1 19.9,28 11.9,28 11.9,32.1 8,32.1 8,20 11.8,20 11.8,16 20,16 20,20 "/>
+<polygon class="st1" points="47.9,20 47.9,32 43.9,32 43.9,28 35.9,28 35.9,32 32,32 32,20 35.9,20 35.9,16 43.9,16 43.9,20 "/>
+<rect x="11.9" y="28" class="st2" width="7.9" height="8.1"/>
+<rect x="35.9" y="28" class="st2" width="8" height="8.1"/>
+</svg>

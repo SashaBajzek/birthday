@@ -1,21 +1,30 @@
 import * as React from 'react';
 import Dot from '../Dot';
+
+import BlinkyContainer from '../Blinky/BlinkyContainer';
+import ClydeContainer from '../Clyde/ClydeContainer';
+import InkyContainer from '../Inky/InkyContainer';
 import PacmanContainer from '../Pacman/PacmanContainer';
+import PinkyContainer from '../Pinky/PinkyContainer';
 import Target from '../Target';
 import './Cell.css';
 
 interface IProps {
+  blinkyPresent: any,
   borders: number[],
   // cellX: number,
   // cellY: number,
   cell: any,
+  clydePresent: any,
   dot: string,
   key: string,
+  inkyPresent: any,
   item: string,
   onSetTarget: any,
   // pacmanX: number,
   // pacmanY: number,
   pacmanPresent: any,
+  pinkyPresent: any,
   targetPresent: any,
   targetVisible: boolean,
   // targetX: number,
@@ -81,11 +90,15 @@ class Cell extends React.Component<IProps, any> {
   }
 
   public render() {
-    const { cell, pacmanPresent, targetPresent, targetVisible } = this.props;
+    const { blinkyPresent, cell, clydePresent, inkyPresent, pacmanPresent, pinkyPresent, targetPresent, targetVisible } = this.props;
     return (
       <div className={`Cell ${this.getClasses()}`} onClick={this.handleClick}>
         <Dot dotSize={cell.dot} />
         { pacmanPresent ? <PacmanContainer /> : "" }
+        { blinkyPresent ? <BlinkyContainer /> : "" }
+        { clydePresent ? <ClydeContainer /> : "" }
+        { inkyPresent ? <InkyContainer /> : "" }
+        { pinkyPresent ? <PinkyContainer /> : "" }
         { targetPresent && targetVisible ? <Target /> : "" }
       </div>
     );

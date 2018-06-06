@@ -1,0 +1,94 @@
+.Blinky .body {
+  fill:#FF0000;
+}
+
+.Clyde .body {
+  fill:#FFB847;
+}
+
+.Inky .body {
+  fill:#00FFDE;
+}
+
+.Pinky .body {
+  fill:#FFB8DE;
+}
+
+.eye_whites {
+  fill:#DEDEDE;
+}
+
+.eye__pupil {
+  fill:#2121DE;
+}
+
+.Ghost {
+  bottom: 0;
+  height: 10px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+  z-index: 2;
+}
+
+.Ghost__4 {
+  animation: ghost__4--flash .5s infinite linear;
+}
+
+.Ghost__3 {
+  animation: ghost__3--flash .5s infinite linear;
+}
+
+@keyframes ghost__4--flash {
+  0% {
+    opacity: 0;
+  }
+  24% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  76% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes ghost__3--flash {
+  0% {
+    opacity: 1;
+  }
+  24% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  76% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+@media (min-width: 340px) {
+  .Ghost {
+    height: 20px;
+    width: 20px;
+  }
+}
