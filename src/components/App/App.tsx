@@ -36,10 +36,22 @@ interface IProps {
   targetY: number
 }
 
-class App extends React.Component<IProps, any> {
+interface IState {
+  isBirthday: boolean
+}
+
+const birthday = {
+  day: 26,
+  month: 11 // December getMonth starts at 0
+};
+
+class App extends React.Component<IProps, IState> {
+  // The page is prerendered at build time, so the date check waits until it runs in the browser.
+  public state = { isBirthday: false };
+
   private timerID: any;
 
-  public handleKeyDown (e: any) {
+  public handleKeyDown = (e: KeyboardEvent) => {
     switch( e.keyCode ) {
       case 40:
         this.props.onSetTargetKeyboard("down");
@@ -63,7 +75,9 @@ class App extends React.Component<IProps, any> {
   }
 
   public componentDidMount() {
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+    this.setState({ isBirthday: isTodayBirthday(birthday) });
+
+    document.addEventListener("keydown", this.handleKeyDown);
 
     this.timerID = setInterval(
       () => this.pacmanMove(),
@@ -72,7 +86,7 @@ class App extends React.Component<IProps, any> {
   }
 
   public componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleKeyDown.bind(this));
+    document.removeEventListener("keydown", this.handleKeyDown);
 
     clearInterval(this.timerID);
   }
@@ -151,17 +165,12 @@ class App extends React.Component<IProps, any> {
   }
 
   public render() {
-    const birthday = {
-      day: 26,
-      month: 11 // December getMonth starts at 0
-    };
-
     return (
       <div className='App'>
         <div>
           <header className='header'>
             <h1 className='header__heading'>Is it Jeffrey's Birthday?</h1>
-            { isTodayBirthday(birthday) ? <h2 className='header__heading birthday'>YES, Happy Birthday Jeffrey!</h2> :
+            { this.state.isBirthday ? <h2 className='header__heading birthday'>YES, Happy Birthday Jeffrey!</h2> :
             <h2 className='header__heading'>NO</h2> }
           </header>
           <ScoreboardContainer />
