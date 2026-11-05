@@ -10,19 +10,15 @@
 }
 
 .dot__large--flashing {
-  animation: flash .5s infinite linear;
+  animation: fade 1.5s infinite alternate ease-in-out;
 }
 
-@keyframes flash {
-  0% {
-    background: center / contain no-repeat url(../../images/dots/dotLarge.svg);
+@keyframes fade {
+  from {
+    opacity: 1;
   }
-  50% {
-    background: black;
-    background-image: none;
-  }
-  100% {
-    background: center / contain no-repeat url(../../images/dots/dotLarge.svg);
+  to {
+    opacity: 0.35;
   }
 }
 
